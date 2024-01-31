@@ -17,12 +17,20 @@ const ButtonWrapper = styled.button`
     cursor: pointer;
 `;
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    label?: string;
+// export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+//     label?: string;
+// }
+
+// const Button: React.FC<ButtonProps> = ({ label = 'Select', ...props }) => {
+//     return <ButtonWrapper {...props}>{label}</ButtonWrapper>;
+// };
+
+export interface ButtonProps {
+  label?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label = 'Select', ...props }) => {
-    return <ButtonWrapper {...props}>{label}</ButtonWrapper>;
+const Button = ({ label, ...props }: ButtonProps) => {
+  return <ButtonWrapper {...props}>{label}</ButtonWrapper>;
 };
   
 export default Button;
