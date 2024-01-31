@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import searchIcon from '../../assets/search-icon.svg';
 
@@ -43,7 +42,7 @@ const CustomMagnifyingGlassSVG = styled.img`
   margin-right: 8px; /* Adjust spacing between icon and input */
 `;
 
-const SearchField: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (props) => {
+const SearchField = ({ ...props }) => {
   return (
     <SearchFieldWrapper>
       <MagnifyingGlassIcon>
