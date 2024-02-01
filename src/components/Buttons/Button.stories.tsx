@@ -2,7 +2,7 @@ import { StoryObj, Meta } from '@storybook/react';
 import Button, { ButtonProps } from './Button';
 
 const meta: Meta<ButtonProps> = {
-  title: 'Components/Button',
+  title: 'Components/Buttons',
   component: Button,
   argTypes: {
     onClick: { action: 'clicked' },
