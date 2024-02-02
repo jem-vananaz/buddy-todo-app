@@ -31,7 +31,12 @@ const CustomMagnifyingGlassSVG = styled.img`
   margin-right: 8px;
 `;
 
-const SearchField = ({ ...props }) => {
+export interface SearchFieldProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const SearchField = ({ value, onChange }: SearchFieldProps) => {
   return (
     <SearchFieldWrapper>
       <MagnifyingGlassIcon>
@@ -40,7 +45,7 @@ const SearchField = ({ ...props }) => {
           alt="Search Icon"
         />
       </MagnifyingGlassIcon>
-      <Input type="text" {...props} />
+      <Input type="text" value={value} onChange={(e) => onChange(e.target.value)} />
     </SearchFieldWrapper>
   );
 };

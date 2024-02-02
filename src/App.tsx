@@ -27,7 +27,7 @@ const Header = styled.div`
 const TitleRow = styled.div`
   display: flex;
   align-items: flex-start; /* Align items at the start (left) */
-  margin-bottom: 8px;
+  justify-content: space-between;
 
   @media (min-width: 600px) {
     margin-bottom: 0;
@@ -84,7 +84,7 @@ const KebabIconContainer = styled.div`
   display: inline-block;
 `;
 
-const KebabIcon = styled.img`
+const KebabIcon = styled.img<{isVisible: boolean}>`
   cursor: pointer;
   transition: filter 0.3s;
   filter: brightness(${(props) => (props.isVisible ? 1.5 : 1)});
@@ -112,7 +112,7 @@ const ActionButton = styled.button`
   }
 `;
 
-const ActionButtons = styled.div`
+const ActionButtons = styled.div<{isVisible: boolean}>`
   display: ${(props) => (props.isVisible ? 'flex' : 'none')};
   position: absolute;
   top: 50%;
@@ -159,23 +159,27 @@ function App() {
   ]);
 
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [visibleActionButtonsId, setVisibleActionButtonsId] = useState(null);
+  const [visibleActionButtonsId, setVisibleActionButtonsId] = useState<number | undefined>(undefined);
 
   const filteredTodos = todos.filter(todo =>
     todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
   );
   
-  const handleKebabIconClick = (id) => {
-    setVisibleActionButtonsId(id === visibleActionButtonsId ? null : id);
+  const handleSelectButton = () => {
+   console.log('select button clicked');
   };
 
-  const handleDeleteTodo = (id) => {
+  const handleKebabIconClick = (id: number) => {
+    setVisibleActionButtonsId(id === visibleActionButtonsId ? undefined : id);
+  };
+
+  const handleDeleteTodo = (id: number) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
-  const handleUpdateTodo = (id) => {
-    // Update logic here
-  };
+  // const handleUpdateTodo = (id: number) => {
+  //   // Update logic here
+  // };
   
   const handleAddTodo = () => {
     const newTodo = { id: todos.length + 1, text: `Task ${todos.length + 1}` };
@@ -185,6 +189,7 @@ function App() {
   const handleLogout = () => {
     // Add your logout logic here
   };
+  
 
   return (
     <AppContainer>
@@ -196,16 +201,16 @@ function App() {
         <SearchFieldWrapper>
           <SearchField
             value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
+            onChange={(newValue) => setSearchKeyword(newValue)}
           />
-          <Button label={'Select'} />
+          <Button label={'Select'} onClick={handleSelectButton}/>
         </SearchFieldWrapper>
       </Header>
       <div className="todo-list">
         {filteredTodos.map((todo) => (
           <TodoItemContainer 
             key={todo.id} 
-            onClick={() => setVisibleActionButtonsId(null)}
+            onClick={() => setVisibleActionButtonsId(undefined)}
             className={visibleActionButtonsId === todo.id ? 'action-buttons-visible' : ''}
           >
             <TodoText>{todo.text}</TodoText>
@@ -221,7 +226,7 @@ function App() {
                 }}
               />
               <ActionButtons isVisible={visibleActionButtonsId === todo.id}>
-                <ActionButton onClick={() => handleUpdateTodo(todo.id)}>Update</ActionButton>
+                <ActionButton>Update</ActionButton>
                 <ActionButton onClick={() => handleDeleteTodo(todo.id)}>Delete</ActionButton>
               </ActionButtons>
             </KebabIconContainer>
