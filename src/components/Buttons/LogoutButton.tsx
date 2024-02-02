@@ -13,12 +13,12 @@ const LogoutIcon = styled.img`
   margin-right: 8px;
 `;
 
-interface LogoutButtonProps {
+export interface LogoutButtonProps {
   onClick: () => void;
 }
 
-const LogoutButton = ({ ...props }: LogoutButtonProps) => {
-  return <LogoutButtonWrapper {...props}>
+const LogoutButton = ({ onClick, ...props }: LogoutButtonProps) => {
+  return <LogoutButtonWrapper onClick={onClick} {...props}>
     <LogoutIcon src={logoutIcon} alt="Logout" />
   </LogoutButtonWrapper>;
 };

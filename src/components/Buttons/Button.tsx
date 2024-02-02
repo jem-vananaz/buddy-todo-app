@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const ButtonWrapper = styled.button`
-    width: 100%;
     height: 38px;
     background-color: rgba(47, 128, 237, 0.3); /* Faded background appearance */
     color: #2F80ED;
@@ -13,15 +12,17 @@ const ButtonWrapper = styled.button`
     line-height: 16.41px;
     letter-spacing: 0em;
     text-align: center;
+    padding: 10px;
     cursor: pointer;
 `;
 
 export interface ButtonProps {
   label?: string;
+  onClick: () => void;
 }
 
-const Button = ({ label, ...props }: ButtonProps) => {
-  return <ButtonWrapper {...props}>{label}</ButtonWrapper>;
+const Button = ({ label, onClick, ...props }: ButtonProps) => {
+  return <ButtonWrapper onClick={onClick} {...props}>{label}</ButtonWrapper>;
 };
-  
+
 export default Button;
