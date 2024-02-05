@@ -21,7 +21,7 @@ export interface ButtonProps {
   onClick: () => void;
 }
 
-const Button = ({ label, onClick, ...props }: ButtonProps) => {
+const Button = ({ label, onClick, ...props } : ButtonProps) => {
   return <ButtonWrapper onClick={onClick} {...props}>{label}</ButtonWrapper>;
 };
 
