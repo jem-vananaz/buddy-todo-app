@@ -17,7 +17,7 @@ export interface LogoutButtonProps {
   onClick: () => void;
 }
 
-const LogoutButton = ({ onClick, ...props }: LogoutButtonProps) => {
+const LogoutButton = ({ onClick, ...props } : LogoutButtonProps) => {
   return <LogoutButtonWrapper onClick={onClick} {...props}>
     <LogoutIcon src={logoutIcon} alt="Logout" />
   </LogoutButtonWrapper>;
