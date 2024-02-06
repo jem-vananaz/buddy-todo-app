@@ -20,14 +20,16 @@ const Home = () => {
   ]);
 
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [visibleActionButtonsId, setVisibleActionButtonsId] = useState<number | undefined>(undefined);
+  const [visibleActionButtonsId, setVisibleActionButtonsId] = useState<
+    number | undefined
+  >(undefined);
 
-  const filteredTodos = todos.filter(todo =>
-    todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
+  const filteredTodos = todos.filter((todo) =>
+    todo.text.toLowerCase().includes(searchKeyword.toLowerCase()),
   );
-  
+
   const handleSelectButton = () => {
-   console.log('select button clicked');
+    console.log('select button clicked');
   };
 
   const handleKebabIconClick = (id: number) => {
@@ -35,13 +37,13 @@ const Home = () => {
   };
 
   const handleDeleteTodo = (id: number) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   // const handleUpdateTodo = (id: number) => {
   //   // Update logic here
   // };
-  
+
   const handleAddTodo = () => {
     const newTodo = { id: todos.length + 1, text: `Task ${todos.length + 1}` };
     setTodos([...todos, newTodo]);
@@ -50,7 +52,6 @@ const Home = () => {
   const handleLogout = () => {
     // Add your logout logic here
   };
-  
 
   return (
     <AppContainer>
@@ -62,7 +63,7 @@ const Home = () => {
       />
       <div className="todo-list">
         {filteredTodos.map((todo) => (
-          <TodoItem 
+          <TodoItem
             key={todo.id}
             id={todo.id}
             text={todo.text}
