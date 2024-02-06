@@ -1,14 +1,14 @@
-import { 
-    TodoItemContainer, 
-    TodoText, 
-    KebabIconContainer, 
-    KebabIcon, 
-    ActionButtons 
+import {
+  TodoItemContainer,
+  TodoText,
+  KebabIconContainer,
+  KebabIcon,
+  ActionButtons,
 } from './elements';
 import kebabIcon from '@/assets/kebab-icon.svg';
 import ActionButton from '@/components/Buttons/ActionButton';
 
-interface TodoItemProps {
+export interface TodoItemProps {
   id: number;
   text: string;
   visibleActionButtonsId: number | undefined;
@@ -24,18 +24,17 @@ const TodoItem = ({
   onClick,
   handleKebabIconClick,
   handleDeleteTodo,
-} : TodoItemProps) => {
+}: TodoItemProps) => {
   const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
     handleKebabIconClick(id);
   };
 
   return (
-    <TodoItemContainer 
-      key={id} 
+    <TodoItemContainer
+      key={id}
       onClick={onClick}
-      className={visibleActionButtonsId === id ? 'action-buttons-visible' : ''}
-    >
+      className={visibleActionButtonsId === id ? 'action-buttons-visible' : ''}>
       <TodoText>{text}</TodoText>
       <KebabIconContainer>
         <KebabIcon
@@ -46,7 +45,10 @@ const TodoItem = ({
           onClick={handleClick}
         />
         <ActionButtons isVisible={visibleActionButtonsId === id}>
-          <ActionButton label={'Update'} onClick={() => console.log('Update logic here')} />
+          <ActionButton
+            label={'Update'}
+            onClick={() => console.log('Update logic here')}
+          />
           <ActionButton label={'Delete'} onClick={() => handleDeleteTodo(id)} />
         </ActionButtons>
       </KebabIconContainer>

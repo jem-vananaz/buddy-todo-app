@@ -23,7 +23,7 @@ export const KebabIconContainer = styled.div`
   display: inline-block;
 `;
 
-export const KebabIcon = styled.img<{isVisible: boolean}>`
+export const KebabIcon = styled.img<{ isVisible: boolean }>`
   cursor: pointer;
   transition: filter 0.3s;
   filter: brightness(${(props) => (props.isVisible ? 1.5 : 1)});
@@ -36,7 +36,7 @@ export const KebabIcon = styled.img<{isVisible: boolean}>`
   }
 `;
 
-export const ActionButtons = styled.div<{isVisible: boolean}>`
+export const ActionButtons = styled.div<{ isVisible: boolean }>`
   display: ${(props) => (props.isVisible ? 'flex' : 'none')};
   position: absolute;
   top: 50%;
@@ -48,5 +48,4 @@ export const ActionButtons = styled.div<{isVisible: boolean}>`
   width: 115px;
   height: 75px;
   margin-right: 7px;
-  z-index: 1;
 `;

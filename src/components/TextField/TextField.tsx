@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import searchIcon from '../../assets/search-icon.svg';
 
-const SearchFieldWrapper = styled.div`
+const TextFieldWrapper = styled.div`
   display: flex;
   position: relative;
 `;
@@ -16,39 +15,40 @@ const Input = styled.input`
   outline: none;
 `;
 
-const MagnifyingGlassIcon = styled.span`
+const IconWrapper = styled.span`
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 8px;
   transform: translateY(-50%);
   color: #828282;
   pointer-events: none; /* Ensure the icon does not interfere with input events */
 `;
 
-const CustomMagnifyingGlassSVG = styled.img`
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-`;
-
-export interface SearchFieldProps {
+export interface TextFieldProps {
   value: string;
   onChange: (value: string) => void;
+  placeholder?: string;
 }
 
-const SearchField = ({ value, onChange }: SearchFieldProps) => {
+const TextField = ({
+  value,
+  onChange,
+  placeholder = 'Enter text here',
+}: TextFieldProps) => {
   return (
-    <SearchFieldWrapper>
-      <MagnifyingGlassIcon>
-        <CustomMagnifyingGlassSVG src={searchIcon} alt="Search Icon" />
-      </MagnifyingGlassIcon>
+    <TextFieldWrapper>
+      <IconWrapper>
+        {/* You can put any icon or component here */}
+        <span>Icon</span>
+      </IconWrapper>
       <Input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
       />
-    </SearchFieldWrapper>
+    </TextFieldWrapper>
   );
 };
 
-export default SearchField;
+export default TextField;

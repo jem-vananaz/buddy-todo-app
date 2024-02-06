@@ -1,5 +1,4 @@
 import { StoryObj, Meta } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import AddButton, { AddButtonProps } from './AddButton';
 
 const meta: Meta<AddButtonProps> = {
@@ -16,4 +15,3 @@ type Story = StoryObj<AddButtonProps>;
 export const Default: Story = {
   args: {},
 };
-

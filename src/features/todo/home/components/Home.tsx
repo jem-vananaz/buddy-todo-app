@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AppContainer } from './elements';
-
 import AddButton from '@/components/Buttons/AddButton';
 import HeaderComponent from '@/components/Header/Header';
 import TodoItem from '@/components/TodoItem/TodoItem';
@@ -74,7 +74,9 @@ const Home = () => {
           />
         ))}
       </div>
-      <AddButton onClick={handleAddTodo} />
+      <Link to="/add-todo">
+        <AddButton onClick={handleAddTodo} />
+      </Link>
     </AppContainer>
   );
 };
