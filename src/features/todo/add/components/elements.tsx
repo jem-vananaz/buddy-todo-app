@@ -36,11 +36,7 @@ export const HeaderTitle = styled.h1`
   }
 `;
 
-export const LogoutButtonWrapper = styled.div`
-  margin-right: -14px;
-`;
-
-export const SearchFieldWrapper = styled.div`
+export const TextFieldWrapper = styled.div`
   display: flex;
   align-items: center;
 

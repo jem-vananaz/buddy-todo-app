@@ -10,17 +10,18 @@ const LogoutButtonWrapper = styled.button`
 const LogoutIcon = styled.img`
   width: 20px;
   height: 20px;
-  margin-right: 8px;
 `;
 
 export interface LogoutButtonProps {
   onClick: () => void;
 }
 
-const LogoutButton = ({ onClick, ...props } : LogoutButtonProps) => {
-  return <LogoutButtonWrapper onClick={onClick} {...props}>
-    <LogoutIcon src={logoutIcon} alt="Logout" />
-  </LogoutButtonWrapper>;
+const LogoutButton = ({ onClick, ...props }: LogoutButtonProps) => {
+  return (
+    <LogoutButtonWrapper onClick={onClick} {...props}>
+      <LogoutIcon src={logoutIcon} alt="Logout" />
+    </LogoutButtonWrapper>
+  );
 };
 
 export default LogoutButton;

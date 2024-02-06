@@ -6,7 +6,7 @@ export const StyledAddButton = styled.button`
   right: 16px;
   width: 48px;
   height: 48px;
-  background-color: #2F80ED;
+  background-color: #2f80ed;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -21,10 +21,8 @@ export interface AddButtonProps {
   onClick: () => void;
 }
 
-const AddButton = ({ onClick } : AddButtonProps) => {
-  return (
-    <StyledAddButton onClick={onClick}>+</StyledAddButton>
-  );
+const AddButton = ({ onClick }: AddButtonProps) => {
+  return <StyledAddButton onClick={onClick}>+</StyledAddButton>;
 };
 
 export default AddButton;

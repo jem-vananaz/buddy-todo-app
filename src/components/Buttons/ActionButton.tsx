@@ -20,13 +20,8 @@ export interface ActionButtonProps {
   onClick: () => void;
 }
 
-  
-const ActionButton = ({ label, onClick } : ActionButtonProps) => {
-  return (
-    <StyledActionButton onClick={onClick}>
-      {label}
-    </StyledActionButton>
-  );
+const ActionButton = ({ label, onClick }: ActionButtonProps) => {
+  return <StyledActionButton onClick={onClick}>{label}</StyledActionButton>;
 };
 
 export default ActionButton;
