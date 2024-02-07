@@ -1,23 +1,60 @@
-import { Header, TitleRow, HeaderTitle, TextFieldWrapper } from './elements';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  Header,
+  TitleRow,
+  HeaderTitle,
+  BackIcon,
+  TextFieldWrapper,
+} from './elements';
+import backIcon from '@/assets/back-icon.svg';
+import Notification from '@/components/Notification/Notification';
 import TextField from '@/components/TextField/TextField';
 
-export interface AddTodoProps {
-  textFieldValue?: string;
-  setTextFieldValue?: (newValue: string) => void;
-}
+const AddTodo = () => {
+  const [todoValue, setTodoValue] = useState('');
+  const [notification, setNotification] = useState('');
 
-const AddTodo = ({ textFieldValue, setTextFieldValue }: AddTodoProps) => {
+  const handleChange = (newValue: string) => {
+    setTodoValue(newValue);
+  };
+
+  const handleClear = () => {
+    setTodoValue('');
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleAddTodo();
+    }
+  };
+
+  const handleAddTodo = () => {
+    // Add logic here for adding to do
+    console.log('to do added: ', todoValue);
+
+    setNotification('To do saved');
+    setTimeout(() => {
+      setNotification('');
+    }, 3000);
+  };
+
   return (
     <Header>
       <TitleRow>
+        <Link to="/">
+          <BackIcon src={backIcon} alt="Back Icon" />
+        </Link>
         <HeaderTitle>Add to do</HeaderTitle>
       </TitleRow>
       <TextFieldWrapper>
         <TextField
-          value={textFieldValue || ''}
-          onChange={(newValue) => setTextFieldValue(newValue)}
-          placeholder="Enter to-do item"
+          value={todoValue}
+          onChange={handleChange}
+          onClear={handleClear}
+          onKeyDown={handleKeyDown}
         />
+        {notification && <Notification message={notification} />}
       </TextFieldWrapper>
     </Header>
   );

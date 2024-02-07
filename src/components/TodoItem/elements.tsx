@@ -16,6 +16,7 @@ export const TodoItemContainer = styled.div`
 
 export const TodoText = styled.div`
   flex-grow: 1;
+  font-size: 14px;
 `;
 
 export const KebabIconContainer = styled.div`

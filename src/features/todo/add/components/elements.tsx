@@ -6,11 +6,6 @@ export const Header = styled.div`
   align-items: flex-start;
   margin-bottom: 16px;
   width: 100%;
-
-  @media (min-width: 600px) {
-    display: grid;
-    grid-template-columns: auto 1fr; /* Auto-sized column for TodoTitle, 1fr-sized column for spacing, and auto-sized column for LogoutButton */
-  }
 `;
 
 export const TitleRow = styled.div`
@@ -26,31 +21,21 @@ export const TitleRow = styled.div`
 `;
 
 export const HeaderTitle = styled.h1`
-  color: #2f80ed;
   font-family: 'Roboto', sans-serif;
-  margin-top: 0;
-  font-size: 24px;
+  font-size: 18px;
+  margin-left: 8px;
+`;
 
-  @media (min-width: 600px) {
-    font-size: 32px;
-  }
+export const BackIcon = styled.img`
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
 `;
 
 export const TextFieldWrapper = styled.div`
   display: flex;
   align-items: center;
-
-  & > *:first-child {
-    margin-right: 7px; /* Add margin to the right of the first child (SearchField) */
-  }
-
-  @media (min-width: 600px) {
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-
-    & > *:first-child {
-      margin-right: 14px; /* Add margin to the right of the first child (SearchField) */
-    }
-  }
+  margin-top: 8px;
+  width: 100%;
 `;
