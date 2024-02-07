@@ -2,7 +2,7 @@ import { StoryObj, Meta } from '@storybook/react';
 import AddButton, { AddButtonProps } from './AddButton';
 
 const meta: Meta<AddButtonProps> = {
-  title: 'Components/AddButton',
+  title: 'Components/Buttons',
   component: AddButton,
   argTypes: {
     onClick: { action: 'clicked' },
@@ -12,6 +12,6 @@ const meta: Meta<AddButtonProps> = {
 export default meta;
 type Story = StoryObj<AddButtonProps>;
 
-export const Default: Story = {
+export const Add: Story = {
   args: {},
 };

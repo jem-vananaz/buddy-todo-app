@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContainer } from './elements';
 import AddButton from '@/components/Buttons/AddButton';
+import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
+import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
 import HeaderComponent from '@/components/Header/Header';
 import TodoItem from '@/components/TodoItem/TodoItem';
 
@@ -23,6 +25,9 @@ const Home = () => {
   const [visibleActionButtonsId, setVisibleActionButtonsId] = useState<
     number | undefined
   >(undefined);
+  const [deleteTodoId, setDeleteTodoId] = useState<number | undefined>(
+    undefined,
+  );
 
   const filteredTodos = todos.filter((todo) =>
     todo.text.toLowerCase().includes(searchKeyword.toLowerCase()),
@@ -37,7 +42,19 @@ const Home = () => {
   };
 
   const handleDeleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    // setTodos(todos.filter((todo) => todo.id !== id));
+    setDeleteTodoId(id);
+  };
+
+  const confirmDeleteTodo = () => {
+    if (deleteTodoId !== undefined) {
+      setTodos(todos.filter((todo) => todo.id !== deleteTodoId));
+      setDeleteTodoId(undefined);
+    }
+  };
+
+  const cancelDeleteTodo = () => {
+    setDeleteTodoId(undefined);
   };
 
   // const handleUpdateTodo = (id: number) => {
@@ -62,21 +79,34 @@ const Home = () => {
         handleLogout={handleLogout}
       />
       <div className="todo-list">
-        {filteredTodos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            id={todo.id}
-            text={todo.text}
-            visibleActionButtonsId={visibleActionButtonsId}
-            onClick={() => setVisibleActionButtonsId(undefined)}
-            handleKebabIconClick={handleKebabIconClick}
-            handleDeleteTodo={handleDeleteTodo}
-          />
-        ))}
+        {todos.length === 0 && !searchKeyword && <EmptyTodoList />}
+        {todos.length > 0 &&
+          filteredTodos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              id={todo.id}
+              text={todo.text}
+              visibleActionButtonsId={visibleActionButtonsId}
+              onClick={() => setVisibleActionButtonsId(undefined)}
+              handleKebabIconClick={handleKebabIconClick}
+              handleDeleteTodo={handleDeleteTodo}
+            />
+          ))}
+        {searchKeyword && filteredTodos.length === 0 && (
+          <EmptyTodoList forSearchResult={true} />
+        )}
       </div>
-      <Link to="/add-todo">
-        <AddButton onClick={handleAddTodo} />
-      </Link>
+      {!searchKeyword && todos.length > 0 && (
+        <Link to="/add-todo">
+          <AddButton onClick={handleAddTodo} />
+        </Link>
+      )}
+      {deleteTodoId !== undefined && (
+        <DeleteConfirmDialog
+          onCancel={cancelDeleteTodo}
+          onConfirm={confirmDeleteTodo}
+        />
+      )}
     </AppContainer>
   );
 };

@@ -1,8 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import AddTodo from '../components/Add/AddTodo';
+import SelectTodo from '../components/Select/SelectTodo';
 
-const HomeRoutes: RouteObject[] = [
+const TodoRoutes: RouteObject[] = [
   {
     path: '/',
     element: <Home />,
@@ -11,6 +12,10 @@ const HomeRoutes: RouteObject[] = [
     path: '/add-todo',
     element: <AddTodo />,
   },
+  {
+    path: '/select-todo',
+    element: <SelectTodo />,
+  },
 ];
 
-export default HomeRoutes;
+export default TodoRoutes;
