@@ -4,8 +4,8 @@ export const StyledAddButton = styled.button`
   position: fixed;
   bottom: 16px;
   right: 16px;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   background-color: #2f80ed;
   color: #fff;
   border: none;
@@ -13,7 +13,7 @@ export const StyledAddButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 18px;
   cursor: pointer;
 `;
 

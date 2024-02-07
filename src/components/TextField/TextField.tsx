@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import clearIcon from '@/assets/clear-icon.svg';
 
 const TextFieldWrapper = styled.div`
   display: flex;
@@ -6,47 +7,64 @@ const TextFieldWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  width: 224px;
+  width: 100%;
+  min-width: 224px;
   height: 32px;
-  padding-left: 32px;
+  padding-left: 10px;
+  padding-right: 32px;
   border: 1px solid #828282;
   border-radius: 4px;
   font-size: 14px;
   outline: none;
+
+  &:focus {
+    border-color: #2f80ed;
+  }
 `;
 
-const IconWrapper = styled.span`
+const ClearIcon = styled.img`
   position: absolute;
   top: 50%;
-  left: 8px;
+  right: 8px;
   transform: translateY(-50%);
-  color: #828282;
-  pointer-events: none; /* Ensure the icon does not interfere with input events */
+  cursor: pointer;
 `;
 
 export interface TextFieldProps {
+  placeholder?: string;
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
+  onClear?: () => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const TextField = ({
+  placeholder = '',
   value,
   onChange,
-  placeholder = 'Enter text here',
+  onClear,
+  onKeyDown,
 }: TextFieldProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+  };
+
+  const handleClear = () => {
+    if (onClear) {
+      onClear();
+    }
+  };
+
   return (
     <TextFieldWrapper>
-      <IconWrapper>
-        {/* You can put any icon or component here */}
-        <span>Icon</span>
-      </IconWrapper>
       <Input
+        placeholder={placeholder}
         type="text"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
+        onChange={handleChange}
+        onKeyDown={onKeyDown}
       />
+      {value && <ClearIcon src={clearIcon} alt="Clear" onClick={handleClear} />}
     </TextFieldWrapper>
   );
 };
