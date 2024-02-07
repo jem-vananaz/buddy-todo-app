@@ -9,7 +9,7 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof Notification>;
 
-export const Default: Story = {
+export const AddingTodo: Story = {
   args: {
     message: 'To do saved',
   },

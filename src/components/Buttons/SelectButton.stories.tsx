@@ -1,19 +1,17 @@
 import { StoryObj, Meta } from '@storybook/react';
-import Button, { ButtonProps } from './Button';
+import SelectButton, { SelectButtonProps } from './SelectButton';
 
-const meta: Meta<ButtonProps> = {
+const meta: Meta<SelectButtonProps> = {
   title: 'Components/Buttons',
-  component: Button,
+  component: SelectButton,
   argTypes: {
     onClick: { action: 'clicked' },
   },
 };
 
 export default meta;
-type Story = StoryObj<ButtonProps>;
+type Story = StoryObj<SelectButtonProps>;
 
 export const Select: Story = {
-  args: {
-    label: 'Select',
-  },
+  args: {},
 };

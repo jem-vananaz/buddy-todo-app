@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   Header,
   TitleRow,
@@ -5,7 +6,7 @@ import {
   LogoutButtonWrapper,
   SearchFieldWrapper,
 } from './elements';
-import Button from '@/components/Buttons/Button';
+import SelectButton from '@/components/Buttons/SelectButton';
 import LogoutButton from '@/components/Buttons/LogoutButton';
 import SearchField from '@/components/SearchField/SearchField';
 
@@ -35,7 +36,9 @@ const HeaderComponent = ({
           value={searchKeyword || ''}
           onChange={(newValue) => setSearchKeyword(newValue)}
         />
-        <Button label={'Select'} onClick={handleSelectButton} />
+        <Link to="/select-todo">
+          <SelectButton onClick={handleSelectButton} />
+        </Link>
       </SearchFieldWrapper>
     </Header>
   );
