@@ -10,14 +10,8 @@ export const Header = styled.div`
 
 export const TitleRow = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
-
-  @media (min-width: 600px) {
-    margin-bottom: 0;
-    grid-column: 1 / -1; /* Span across all columns */
-  }
 `;
 
 export const HeaderTitle = styled.h1`
@@ -36,6 +30,5 @@ export const BackIcon = styled.img`
 export const TextFieldWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 8px;
   width: 100%;
 `;

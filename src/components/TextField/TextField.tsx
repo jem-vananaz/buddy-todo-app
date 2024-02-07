@@ -7,8 +7,7 @@ const TextFieldWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
-  min-width: 224px;
+  width: 224px;
   height: 32px;
   padding-left: 10px;
   padding-right: 32px;
@@ -63,6 +62,7 @@ const TextField = ({
         value={value}
         onChange={handleChange}
         onKeyDown={onKeyDown}
+        autoFocus={true}
       />
       {value && <ClearIcon src={clearIcon} alt="Clear" onClick={handleClear} />}
     </TextFieldWrapper>
