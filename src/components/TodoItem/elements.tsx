@@ -14,9 +14,10 @@ export const TodoItemContainer = styled.div`
   }
 `;
 
-export const TodoText = styled.div`
+export const TodoText = styled.div<{ isSelectedForDeletion?: boolean }>`
   flex-grow: 1;
   font-size: 14px;
+  color: ${(props) => (props.isSelectedForDeletion ? '#ed2f2f' : 'inherit')};
 `;
 
 export const KebabIconContainer = styled.div`

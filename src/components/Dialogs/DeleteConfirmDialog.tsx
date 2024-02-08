@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-interface DeleteConfirmDialogProps {
-  onCancel: () => void;
-  onConfirm: () => void;
-}
-
 const DialogContainer = styled.div`
   position: fixed;
   top: 50%;
@@ -52,6 +47,11 @@ const YesButton = styled(Button)`
   background-color: #2f80ed;
   color: white;
 `;
+
+export interface DeleteConfirmDialogProps {
+  onCancel: () => void;
+  onConfirm: () => void;
+}
 
 const DeleteConfirmDialog = ({
   onCancel,
