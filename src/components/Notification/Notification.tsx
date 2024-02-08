@@ -16,7 +16,7 @@ interface NotificationProps {
   message: string;
 }
 
-const Notification: React.FC<NotificationProps> = ({ message }) => {
+const Notification = ({ message }: NotificationProps) => {
   return <NotificationContainer>{message}</NotificationContainer>;
 };
 

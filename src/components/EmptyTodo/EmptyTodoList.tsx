@@ -28,6 +28,11 @@ const LineBreak = styled.div`
   margin-bottom: 6px;
 `;
 
+export interface EmptyTodoListProps {
+  forSearchResult?: boolean;
+  forSelection?: boolean;
+}
+
 const EmptyTodoList = ({ forSearchResult = false, forSelection = false }) => (
   <EmptyTodoListContainer>
     <TodoListIcon src={todoListIcon} alt="Todoist Icon" />
