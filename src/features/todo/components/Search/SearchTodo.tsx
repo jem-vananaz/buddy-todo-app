@@ -1,11 +1,11 @@
 import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
 import TodoComponent from '@/components/Todo/TodoComponent';
 
-const SelectTodo = () => (
+const SearchTodo = () => (
   <>
-    <TodoComponent title="Select to do" showTextField={false} />
+    <TodoComponent title="Search to do" showTextField={false} />
     <EmptyTodoList forSelection={true} />
   </>
 );
 
-export default SelectTodo;
+export default SearchTodo;

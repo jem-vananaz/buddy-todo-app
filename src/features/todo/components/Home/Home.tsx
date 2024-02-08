@@ -6,7 +6,7 @@ import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
 import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
 import HeaderComponent from '@/components/Header/Header';
 import Notification from '@/components/Notification/Notification';
-import TodoItem from '@/components/TodoItem/TodoItem';
+import TodoItem from '@/components/Todo/TodoItem/TodoItem';
 
 const Home = () => {
   const [todos, setTodos] = useState([
