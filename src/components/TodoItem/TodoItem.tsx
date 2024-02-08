@@ -11,6 +11,7 @@ import ActionButton from '@/components/Buttons/ActionButton';
 export interface TodoItemProps {
   id: number;
   text: string;
+  isSelectedForDeletion?: boolean;
   visibleActionButtonsId: number | undefined;
   onClick: () => void;
   handleKebabIconClick: (id: number) => void;
@@ -20,6 +21,7 @@ export interface TodoItemProps {
 const TodoItem = ({
   id,
   text,
+  isSelectedForDeletion = false,
   visibleActionButtonsId,
   onClick,
   handleKebabIconClick,
@@ -35,13 +37,15 @@ const TodoItem = ({
       key={id}
       onClick={onClick}
       className={visibleActionButtonsId === id ? 'action-buttons-visible' : ''}>
-      <TodoText>{text}</TodoText>
+      <TodoText isSelectedForDeletion={isSelectedForDeletion}>{text}</TodoText>
       <KebabIconContainer>
         <KebabIcon
           src={kebabIcon}
           alt="Kebab Icon"
-          className={visibleActionButtonsId === id ? 'blue' : ''}
-          isVisible={visibleActionButtonsId === id}
+          className={
+            isSelectedForDeletion || visibleActionButtonsId === id ? 'blue' : ''
+          }
+          isVisible={!isSelectedForDeletion && visibleActionButtonsId === id}
           onClick={handleClick}
         />
         <ActionButtons isVisible={visibleActionButtonsId === id}>

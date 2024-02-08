@@ -5,6 +5,7 @@ import AddButton from '@/components/Buttons/AddButton';
 import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
 import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
 import HeaderComponent from '@/components/Header/Header';
+import Notification from '@/components/Notification/Notification';
 import TodoItem from '@/components/TodoItem/TodoItem';
 
 const Home = () => {
@@ -25,9 +26,11 @@ const Home = () => {
   const [visibleActionButtonsId, setVisibleActionButtonsId] = useState<
     number | undefined
   >(undefined);
-  const [deleteTodoId, setDeleteTodoId] = useState<number | undefined>(
-    undefined,
-  );
+  const [selectedForDeletionId, setSelectedForDeletionId] = useState<
+    number | undefined
+  >(undefined);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
 
   const filteredTodos = todos.filter((todo) =>
     todo.text.toLowerCase().includes(searchKeyword.toLowerCase()),
@@ -42,19 +45,24 @@ const Home = () => {
   };
 
   const handleDeleteTodo = (id: number) => {
-    // setTodos(todos.filter((todo) => todo.id !== id));
-    setDeleteTodoId(id);
+    setSelectedForDeletionId(id);
   };
 
   const confirmDeleteTodo = () => {
-    if (deleteTodoId !== undefined) {
-      setTodos(todos.filter((todo) => todo.id !== deleteTodoId));
-      setDeleteTodoId(undefined);
+    if (selectedForDeletionId !== undefined) {
+      setTodos(todos.filter((todo) => todo.id !== selectedForDeletionId));
+      setSelectedForDeletionId(undefined);
+      setNotificationMessage('To do deleted');
+      setShowNotification(true);
+
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 3000);
     }
   };
 
   const cancelDeleteTodo = () => {
-    setDeleteTodoId(undefined);
+    setSelectedForDeletionId(undefined);
   };
 
   // const handleUpdateTodo = (id: number) => {
@@ -86,6 +94,7 @@ const Home = () => {
               key={todo.id}
               id={todo.id}
               text={todo.text}
+              isSelectedForDeletion={todo.id === selectedForDeletionId}
               visibleActionButtonsId={visibleActionButtonsId}
               onClick={() => setVisibleActionButtonsId(undefined)}
               handleKebabIconClick={handleKebabIconClick}
@@ -101,12 +110,13 @@ const Home = () => {
           <AddButton onClick={handleAddTodo} />
         </Link>
       )}
-      {deleteTodoId !== undefined && (
+      {selectedForDeletionId !== undefined && (
         <DeleteConfirmDialog
           onCancel={cancelDeleteTodo}
           onConfirm={confirmDeleteTodo}
         />
       )}
+      {showNotification && <Notification message={notificationMessage} />}
     </AppContainer>
   );
 };
