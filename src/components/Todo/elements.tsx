@@ -5,7 +5,6 @@ export const Header = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 16px;
-  width: 100%;
 `;
 
 export const TitleRow = styled.div`
