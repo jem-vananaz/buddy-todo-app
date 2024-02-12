@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Header,
@@ -15,17 +15,23 @@ interface TodoComponentProps {
   title: string;
   onAction?: (todoValue: string) => void;
   actionNotificationMessage?: string;
-  showTextField?: boolean; // Make showTextField optional
+  showTextField?: boolean;
+  initialValue?: string;
 }
 
 const TodoComponent = ({
   title,
   onAction,
   actionNotificationMessage,
-  showTextField = true, // Default value is true
+  showTextField = true,
+  initialValue = '',
 }: TodoComponentProps) => {
   const [todoValue, setTodoValue] = useState('');
   const [notification, setNotification] = useState('');
+
+  useEffect(() => {
+    setTodoValue(initialValue);
+  }, [initialValue]);
 
   const handleChange = (newValue: string) => {
     setTodoValue(newValue);
@@ -42,7 +48,6 @@ const TodoComponent = ({
   };
 
   const handleAction = () => {
-    // Call the onAction function passed through props
     if (onAction) {
       onAction(todoValue);
     }

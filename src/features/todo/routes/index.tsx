@@ -18,7 +18,7 @@ const TodoRoutes: RouteObject[] = [
     element: <SelectTodo />,
   },
   {
-    path: '/update-todo',
+    path: '/update-todo/:id',
     element: <UpdateTodo />,
   },
 ];

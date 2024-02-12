@@ -9,8 +9,8 @@ const AddTodo = () => {
   return (
     <TodoComponent
       title="Add to do"
-      actionNotificationMessage="To do saved"
       onAction={handleAddTodo}
+      actionNotificationMessage="To do saved"
     />
   );
 };

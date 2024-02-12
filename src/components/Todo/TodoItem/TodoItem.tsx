@@ -15,6 +15,7 @@ export interface TodoItemProps {
   visibleActionButtonsId: number | undefined;
   onClick: () => void;
   handleKebabIconClick: (id: number) => void;
+  handleUpdateTodo: (id: number) => void;
   handleDeleteTodo: (id: number) => void;
 }
 
@@ -25,6 +26,7 @@ const TodoItem = ({
   visibleActionButtonsId,
   onClick,
   handleKebabIconClick,
+  handleUpdateTodo,
   handleDeleteTodo,
 }: TodoItemProps) => {
   const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -49,10 +51,7 @@ const TodoItem = ({
           onClick={handleClick}
         />
         <ActionButtons isVisible={visibleActionButtonsId === id}>
-          <ActionButton
-            label={'Update'}
-            onClick={() => console.log('Update logic here')}
-          />
+          <ActionButton label={'Update'} onClick={() => handleUpdateTodo(id)} />
           <ActionButton label={'Delete'} onClick={() => handleDeleteTodo(id)} />
         </ActionButtons>
       </KebabIconContainer>

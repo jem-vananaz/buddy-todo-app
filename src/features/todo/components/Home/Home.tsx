@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContainer } from './elements';
 import AddButton from '@/components/Buttons/AddButton';
 import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
@@ -36,12 +36,24 @@ const Home = () => {
     todo.text.toLowerCase().includes(searchKeyword.toLowerCase()),
   );
 
+  const navigate = useNavigate();
+
   const handleSelectButton = () => {
     console.log('select button clicked');
   };
 
   const handleKebabIconClick = (id: number) => {
     setVisibleActionButtonsId(id === visibleActionButtonsId ? undefined : id);
+  };
+
+  const handleUpdateTodo = (id: number) => {
+    console.log(`Navigating to update-todo with id ${id}`);
+    // Find the todo item with the given id
+    const todoToUpdate = todos.find((todo) => todo.id === id);
+    if (todoToUpdate) {
+      console.log(todoToUpdate);
+      navigate(`/update-todo/${id}`);
+    }
   };
 
   const handleDeleteTodo = (id: number) => {
@@ -64,10 +76,6 @@ const Home = () => {
   const cancelDeleteTodo = () => {
     setSelectedForDeletionId(undefined);
   };
-
-  // const handleUpdateTodo = (id: number) => {
-  //   // Update logic here
-  // };
 
   const handleAddTodo = () => {
     const newTodo = { id: todos.length + 1, text: `Task ${todos.length + 1}` };
@@ -98,6 +106,7 @@ const Home = () => {
               visibleActionButtonsId={visibleActionButtonsId}
               onClick={() => setVisibleActionButtonsId(undefined)}
               handleKebabIconClick={handleKebabIconClick}
+              handleUpdateTodo={handleUpdateTodo}
               handleDeleteTodo={handleDeleteTodo}
             />
           ))}
