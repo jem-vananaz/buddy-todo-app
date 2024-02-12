@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import {
   TodoItemContainer,
   TodoText,
@@ -8,15 +9,15 @@ import {
 import kebabIcon from '@/assets/kebab-icon.svg';
 import ActionButton from '@/components/Buttons/ActionButton';
 
-export interface TodoItemProps {
-  id: number;
+interface TodoItemProps {
+  id: string;
   text: string;
   isSelectedForDeletion?: boolean;
-  visibleActionButtonsId: number | undefined;
+  visibleActionButtonsId: string | undefined;
   onClick: () => void;
-  handleKebabIconClick: (id: number) => void;
-  handleUpdateTodo: (id: number) => void;
-  handleDeleteTodo: (id: number) => void;
+  handleKebabIconClick: (id: string) => void;
+  handleUpdateTodo: (id: string) => void;
+  handleDeleteTodo: (id: string) => void;
 }
 
 const TodoItem = ({
@@ -33,6 +34,32 @@ const TodoItem = ({
     e.stopPropagation();
     handleKebabIconClick(id);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const clickedElement = e.target as Node;
+      const isWithinTodoItem = clickedElement.closest('.todo-item');
+      const isWithinActionButtons = clickedElement.closest('.action-buttons');
+
+      if (
+        !document.body.contains(clickedElement) ||
+        isWithinTodoItem ||
+        isWithinActionButtons
+      ) {
+        return;
+      }
+
+      handleKebabIconClick('');
+    };
+
+    if (visibleActionButtonsId === id) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [id, visibleActionButtonsId, handleKebabIconClick]);
 
   return (
     <TodoItemContainer

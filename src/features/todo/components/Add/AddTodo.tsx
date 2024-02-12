@@ -1,9 +1,16 @@
 import TodoComponent from '@/components/Todo/TodoComponent';
+import { addTodoEndpoint } from '../../../../api';
 
 const AddTodo = () => {
-  const handleAddTodo = (todoValue: string) => {
+  const handleAddTodo = async (todoValue: string) => {
     console.log('Adding todo:', todoValue);
-    // Add logic here to actually save the todo
+    try {
+      // Call the addTodoEndpoint function to add todo
+      const result = await addTodoEndpoint(todoValue);
+      console.log('Adding todo:', result);
+    } catch (error) {
+      console.error('Error adding todo:', error);
+    }
   };
 
   return (
