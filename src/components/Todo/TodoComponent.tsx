@@ -17,6 +17,7 @@ interface TodoComponentProps {
   actionNotificationMessage?: string;
   showTextField?: boolean;
   initialValue?: string;
+  clearTrigger?: boolean;
 }
 
 const TodoComponent = ({
@@ -25,6 +26,7 @@ const TodoComponent = ({
   actionNotificationMessage,
   showTextField = true,
   initialValue = '',
+  clearTrigger = false,
 }: TodoComponentProps) => {
   const [todoValue, setTodoValue] = useState('');
   const [notification, setNotification] = useState('');
@@ -32,6 +34,12 @@ const TodoComponent = ({
   useEffect(() => {
     setTodoValue(initialValue);
   }, [initialValue]);
+
+  useEffect(() => {
+    if (clearTrigger) {
+      setTodoValue(''); // Clear the text field when clearTrigger changes
+    }
+  }, [clearTrigger]);
 
   const handleChange = (newValue: string) => {
     setTodoValue(newValue);
@@ -68,7 +76,7 @@ const TodoComponent = ({
         </Link>
         <HeaderTitle>{title}</HeaderTitle>
       </TitleRow>
-      {showTextField && ( // Only render TextField if showTextField is true
+      {showTextField && (
         <TextFieldWrapper>
           <TextField
             value={todoValue}

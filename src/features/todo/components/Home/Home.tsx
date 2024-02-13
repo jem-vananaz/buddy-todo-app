@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { AppContainer } from './elements';
 import AddButton from '@/components/Buttons/AddButton';
@@ -38,16 +38,12 @@ const Home = () => {
   };
 
   const handleKebabIconClick = (id: string) => {
-    console.log('handleKebabIconClick', id);
     setVisibleActionButtonsId(id === visibleActionButtonsId ? undefined : id);
   };
 
   const handleUpdateTodo = (id: string) => {
-    console.log(`Navigating to update-todo with id ${id}`);
-    // Find the todo item with the given id
-    const todoToUpdate = todos.find((todo) => todo._id === id);
+    const todoToUpdate = (todos ?? []).find((todo) => todo._id === id);
     if (todoToUpdate) {
-      console.log(todoToUpdate);
       navigate(`/update-todo/${id}`);
     }
   };
@@ -74,8 +70,7 @@ const Home = () => {
   };
 
   const handleAddTodo = () => {
-    // const newTodo = { id: todos.length + 1, text: `Task ${todos.length + 1}` };
-    // setTodos([...todos, newTodo]);
+    navigate('/add-todo');
   };
 
   const handleLogout = () => {
@@ -92,8 +87,7 @@ const Home = () => {
       />
       <div className="todo-list">
         {(!todos || todos.length === 0) && !searchKeyword && <EmptyTodoList />}
-        {todos &&
-          todos.length > 0 &&
+        {filteredTodos &&
           filteredTodos.map((todo) => (
             <TodoItem
               key={todo._id}
@@ -112,9 +106,7 @@ const Home = () => {
         )}
       </div>
       {!searchKeyword && todos && todos.length > 0 && (
-        <Link to="/add-todo">
-          <AddButton onClick={handleAddTodo} />
-        </Link>
+        <AddButton onClick={handleAddTodo} />
       )}
       {selectedForDeletionId !== undefined && (
         <DeleteConfirmDialog

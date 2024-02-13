@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import clearIcon from '@/assets/clear-icon.svg';
 
@@ -49,6 +50,7 @@ const TextField = ({
   };
 
   const handleClear = () => {
+    onChange('');
     if (onClear) {
       onClear();
     }
