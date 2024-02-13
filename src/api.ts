@@ -14,14 +14,12 @@ export const addTodoEndpoint = async (todoValue: string): Promise<Todo> => {
     },
     body: JSON.stringify({ todoValue }),
   });
-  // Assuming your API returns a Todo object
   return response.json() as Promise<Todo>;
 };
 
 // Function to fetch all todos
 export const fetchTodosEndpoint = async (): Promise<Todo[]> => {
   const response = await fetch(`${BASE_URL}/todos`);
-  // Assuming your API returns an array of Todo objects
   return response.json() as Promise<Todo[]>;
 };
 
@@ -30,6 +28,5 @@ export const deleteTodoEndpoint = async (todoId: string): Promise<void> => {
   const response = await fetch(`${BASE_URL}/todos/${todoId}`, {
     method: 'DELETE',
   });
-  // Assuming your API doesn't return anything upon successful deletion
   return response.json() as Promise<void>;
 };
