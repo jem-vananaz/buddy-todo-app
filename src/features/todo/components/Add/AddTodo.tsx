@@ -5,13 +5,15 @@ import { addTodoEndpoint } from '../../../../api';
 
 const AddTodo = () => {
   const [clearTrigger, setClearTrigger] = useState(false);
-  const addTodoMutation = useMutation(addTodoEndpoint);
+  const addTodoMutation = useMutation(addTodoEndpoint, {
+    onSuccess: () => {
+      setClearTrigger(true);
+    },
+  });
 
   const handleAddTodo = async (todoValue: string) => {
-    console.log('Adding todo:', todoValue);
     try {
       await addTodoMutation.mutateAsync(todoValue);
-      setClearTrigger(true);
     } catch (error) {
       console.error('Error adding todo:', error);
     }
