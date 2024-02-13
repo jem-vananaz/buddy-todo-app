@@ -1,8 +1,8 @@
 const BASE_URL = 'http://localhost:3000/api';
 
 export interface Todo {
-  id: string;
-  title: string;
+  _id: string;
+  text: string;
 }
 
 // Function to add a todo
