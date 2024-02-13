@@ -23,8 +23,12 @@ const Home = () => {
   const [notificationMessage, setNotificationMessage] = useState('');
   const [showNotification, setShowNotification] = useState(false);
 
-  const filteredTodos = todos?.filter((todo) =>
-    todo.text.toLowerCase().includes(searchKeyword.toLowerCase()),
+  const filteredTodos = todos?.filter(
+    (todo) =>
+      todo &&
+      todo.text &&
+      typeof todo.text === 'string' &&
+      todo.text.toLowerCase().includes(searchKeyword.toLowerCase()),
   );
 
   const navigate = useNavigate();
