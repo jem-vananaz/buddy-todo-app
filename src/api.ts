@@ -12,7 +12,7 @@ export const addTodoEndpoint = async (todoValue: string): Promise<Todo> => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ todoValue }),
+    body: JSON.stringify({ text: todoValue }),
   });
   return response.json() as Promise<Todo>;
 };

@@ -1,13 +1,17 @@
+import { useState } from 'react';
+import { useMutation } from 'react-query';
 import TodoComponent from '@/components/Todo/TodoComponent';
 import { addTodoEndpoint } from '../../../../api';
 
 const AddTodo = () => {
+  const [clearTrigger, setClearTrigger] = useState(false);
+  const addTodoMutation = useMutation(addTodoEndpoint);
+
   const handleAddTodo = async (todoValue: string) => {
     console.log('Adding todo:', todoValue);
     try {
-      // Call the addTodoEndpoint function to add todo
-      const result = await addTodoEndpoint(todoValue);
-      console.log('Adding todo:', result);
+      await addTodoMutation.mutateAsync(todoValue);
+      setClearTrigger(true);
     } catch (error) {
       console.error('Error adding todo:', error);
     }
@@ -18,6 +22,7 @@ const AddTodo = () => {
       title="Add to do"
       onAction={handleAddTodo}
       actionNotificationMessage="To do saved"
+      clearTrigger={clearTrigger}
     />
   );
 };
