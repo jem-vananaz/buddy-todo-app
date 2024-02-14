@@ -8,7 +8,7 @@ import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
 import HeaderComponent from '@/components/Header/Header';
 import Notification from '@/components/Notification/Notification';
 import TodoItem from '@/components/Todo/TodoItem/TodoItem';
-import { Todo, fetchTodosEndpoint, deleteTodoEndpoint } from '@/api';
+import { Todo, fetchTodosEndpoint, deleteTodoEndpoint } from '@/utils/api';
 
 const Home = () => {
   const queryClient = useQueryClient();
