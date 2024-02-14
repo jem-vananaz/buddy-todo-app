@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { AppContainer } from './elements';
 import AddButton from '@/components/Buttons/AddButton';
 import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
@@ -8,7 +8,7 @@ import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
 import HeaderComponent from '@/components/Header/Header';
 import Notification from '@/components/Notification/Notification';
 import TodoItem from '@/components/Todo/TodoItem/TodoItem';
-import { fetchTodosEndpoint, deleteTodoEndpoint, Todo } from '@/api';
+import { Todo, fetchTodosEndpoint, deleteTodoEndpoint } from '@/api';
 
 const Home = () => {
   const { data: todos, refetch } = useQuery<Todo[], Error>(
