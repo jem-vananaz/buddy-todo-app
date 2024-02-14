@@ -25,8 +25,7 @@ export const fetchTodosEndpoint = async (): Promise<Todo[]> => {
 
 // Function to delete a todo by id
 export const deleteTodoEndpoint = async (todoId: string): Promise<void> => {
-  const response = await fetch(`${BASE_URL}/todos/${todoId}`, {
+  await fetch(`${BASE_URL}/todos/${todoId}`, {
     method: 'DELETE',
   });
-  return response.json() as Promise<void>;
 };

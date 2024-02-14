@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { AppContainer } from './elements';
 import AddButton from '@/components/Buttons/AddButton';
 import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
@@ -8,10 +8,23 @@ import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
 import HeaderComponent from '@/components/Header/Header';
 import Notification from '@/components/Notification/Notification';
 import TodoItem from '@/components/Todo/TodoItem/TodoItem';
-import { fetchTodosEndpoint, Todo } from '../../../../api';
+import { fetchTodosEndpoint, deleteTodoEndpoint, Todo } from '@/api';
 
 const Home = () => {
-  const { data: todos } = useQuery<Todo[], Error>('todos', fetchTodosEndpoint);
+  const { data: todos, refetch } = useQuery<Todo[], Error>(
+    'todos',
+    fetchTodosEndpoint,
+  );
+  const mutateDeleteTodo = useMutation(deleteTodoEndpoint, {
+    onSuccess: async () => {
+      await refetch(); // Update data after deletion
+      setNotificationMessage('To do deleted');
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 3000);
+    },
+  });
 
   const [searchKeyword, setSearchKeyword] = useState('');
   const [visibleActionButtonsId, setVisibleActionButtonsId] = useState<
@@ -54,14 +67,8 @@ const Home = () => {
 
   const confirmDeleteTodo = () => {
     if (selectedForDeletionId !== undefined) {
-      // setTodos(todos.filter((todo) => todo.id !== selectedForDeletionId));
+      mutateDeleteTodo.mutateAsync(selectedForDeletionId);
       setSelectedForDeletionId(undefined);
-      setNotificationMessage('To do deleted');
-      setShowNotification(true);
-
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 3000);
     }
   };
 
