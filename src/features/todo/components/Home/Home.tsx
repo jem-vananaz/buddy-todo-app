@@ -108,7 +108,7 @@ const Home = () => {
               handleDeleteTodo={handleDeleteTodo}
             />
           ))}
-        {searchKeyword && (!todos || todos.length === 0) && (
+        {searchKeyword && (!filteredTodos || filteredTodos.length === 0) && (
           <EmptyTodoList forSearchResult={true} />
         )}
       </div>
