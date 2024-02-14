@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Header,
@@ -18,6 +18,7 @@ interface TodoComponentProps {
   showTextField?: boolean;
   initialValue?: string;
   clearTrigger?: boolean;
+  onClear?: () => void;
 }
 
 const TodoComponent = ({
@@ -27,27 +28,30 @@ const TodoComponent = ({
   showTextField = true,
   initialValue = '',
   clearTrigger = false,
+  onClear,
 }: TodoComponentProps) => {
-  const [todoValue, setTodoValue] = useState('');
+  const [todoValue, setTodoValue] = useState(initialValue);
   const [notification, setNotification] = useState('');
 
   useEffect(() => {
-    setTodoValue(initialValue);
-  }, [initialValue]);
-
-  useEffect(() => {
     if (clearTrigger) {
-      setTodoValue(''); // Clear the text field when clearTrigger changes
+      setTodoValue('');
+      if (onClear) {
+        onClear();
+      }
     }
-  }, [clearTrigger]);
+  }, [clearTrigger, onClear]);
 
   const handleChange = (newValue: string) => {
     setTodoValue(newValue);
   };
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setTodoValue('');
-  };
+    if (onClear) {
+      onClear();
+    }
+  }, [onClear]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
