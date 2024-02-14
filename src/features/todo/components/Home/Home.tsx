@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { AppContainer } from './elements';
 import AddButton from '@/components/Buttons/AddButton';
 import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
@@ -11,13 +11,11 @@ import TodoItem from '@/components/Todo/TodoItem/TodoItem';
 import { Todo, fetchTodosEndpoint, deleteTodoEndpoint } from '@/api';
 
 const Home = () => {
-  const { data: todos, refetch } = useQuery<Todo[], Error>(
-    'todos',
-    fetchTodosEndpoint,
-  );
+  const queryClient = useQueryClient();
+  const { data: todos } = useQuery<Todo[], Error>('todos', fetchTodosEndpoint);
   const mutateDeleteTodo = useMutation(deleteTodoEndpoint, {
-    onSuccess: async () => {
-      await refetch(); // Update data after deletion
+    onSuccess: () => {
+      queryClient.invalidateQueries('todos');
       setNotificationMessage('To do deleted');
       setShowNotification(true);
       setTimeout(() => {

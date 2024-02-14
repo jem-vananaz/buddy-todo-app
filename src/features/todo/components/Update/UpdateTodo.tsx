@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import TodoComponent from '@/components/Todo/TodoComponent';
 import { Todo, fetchTodoById, updateTodoEndpoint } from '@/api';
 
@@ -9,13 +9,14 @@ const UpdateTodo = () => {
   const [initialValue, setInitialValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
 
-  const {
-    data: todo,
-    isLoading,
-    refetch,
-  } = useQuery<Todo, Error>(['todo', id], () => fetchTodoById(id || ''), {
-    enabled: !!id, // Fetch only when id is available
-  });
+  const queryClient = useQueryClient();
+  const { data: todo, isLoading } = useQuery<Todo, Error>(
+    ['todo', id],
+    () => fetchTodoById(id || ''),
+    {
+      enabled: !!id, // Fetch only when id is available
+    },
+  );
 
   const updateTodoMutation = useMutation<
     Todo,
@@ -23,7 +24,7 @@ const UpdateTodo = () => {
     { _id: string; text: string }
   >((data) => updateTodoEndpoint(data._id, data.text), {
     onSuccess: () => {
-      refetch();
+      queryClient.invalidateQueries('todo');
     },
   });
 
