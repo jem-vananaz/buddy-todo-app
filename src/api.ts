@@ -23,6 +23,27 @@ export const fetchTodosEndpoint = async (): Promise<Todo[]> => {
   return response.json() as Promise<Todo[]>;
 };
 
+// Function to fetch a todo by id
+export const fetchTodoById = async (todoId: string): Promise<Todo> => {
+  const response = await fetch(`${BASE_URL}/todos/${todoId}`);
+  return response.json() as Promise<Todo>;
+};
+
+// Function to update a todo by id
+export const updateTodoEndpoint = async (
+  todoId: string,
+  updatedText: string,
+): Promise<Todo> => {
+  const response = await fetch(`${BASE_URL}/todos/${todoId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ text: updatedText }),
+  });
+  return response.json() as Promise<Todo>;
+};
+
 // Function to delete a todo by id
 export const deleteTodoEndpoint = async (todoId: string): Promise<void> => {
   await fetch(`${BASE_URL}/todos/${todoId}`, {
