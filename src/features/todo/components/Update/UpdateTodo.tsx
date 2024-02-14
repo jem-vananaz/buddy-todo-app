@@ -9,15 +9,23 @@ const UpdateTodo = () => {
   const [initialValue, setInitialValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
 
-  const { data: todo, isLoading } = useQuery<Todo, Error>(['todo', id], () =>
-    fetchTodoById(id || ''),
-  );
+  const {
+    data: todo,
+    isLoading,
+    refetch,
+  } = useQuery<Todo, Error>(['todo', id], () => fetchTodoById(id || ''), {
+    enabled: !!id, // Fetch only when id is available
+  });
 
   const updateTodoMutation = useMutation<
     Todo,
     Error,
     { _id: string; text: string }
-  >((data) => updateTodoEndpoint(data._id, data.text));
+  >((data) => updateTodoEndpoint(data._id, data.text), {
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   useEffect(() => {
     if (!isLoading && todo) {
