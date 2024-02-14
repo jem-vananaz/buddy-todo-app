@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import TodoComponent from '@/components/Todo/TodoComponent';
-import { addTodoEndpoint } from '../../../../api';
+import { addTodoEndpoint } from '@/api';
 
 const AddTodo = () => {
   const [clearTrigger, setClearTrigger] = useState(false);

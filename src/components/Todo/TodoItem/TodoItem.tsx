@@ -37,7 +37,7 @@ const TodoItem = ({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      const clickedElement = e.target as Node;
+      const clickedElement = e.target as Element;
       const isWithinTodoItem = clickedElement.closest('.todo-item');
       const isWithinActionButtons = clickedElement.closest('.action-buttons');
 
