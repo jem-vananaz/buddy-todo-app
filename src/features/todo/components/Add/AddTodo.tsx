@@ -19,12 +19,17 @@ const AddTodo = () => {
     }
   };
 
+  const clearTextField = () => {
+    setClearTrigger(false); // Reset the clearTrigger state back to false
+  };
+
   return (
     <TodoComponent
       title="Add to do"
       onAction={handleAddTodo}
       actionNotificationMessage="To do saved"
       clearTrigger={clearTrigger}
+      onClear={clearTextField}
     />
   );
 };
