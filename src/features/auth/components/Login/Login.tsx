@@ -68,7 +68,6 @@ const Login = () => {
     onSuccess: (data) => {
       const { token } = data;
       setToken(token);
-      console.log('Login successful. Token:', token);
       navigate('/');
     },
     onError: (error: ErrorResponse) => {
@@ -114,6 +113,7 @@ const Login = () => {
           type="email"
           value={email}
           onChange={handleEmailChange}
+          clearIconVisible={false}
         />
         {emailErrorMessage && <ErrorMessage>{emailErrorMessage}</ErrorMessage>}
         <TextField
@@ -121,6 +121,7 @@ const Login = () => {
           type="password"
           value={password}
           onChange={handlePasswordChange}
+          clearIconVisible={false}
         />
         <LoginButton onClick={handleLogin} disabled={isDisabled}>
           Login
