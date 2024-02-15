@@ -75,6 +75,27 @@ export const deleteTodoEndpoint = async (todoId: string): Promise<void> => {
   });
 };
 
+// Function to register a new user
+export const registerEndpoint = async (credentials: {
+  email: string;
+  password: string;
+}): Promise<{ message: string; token?: string }> => {
+  const response = await fetch(`${BASE_URL}/auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return response.json();
+};
+
 // Function to login
 export const loginEndpoint = async (credentials: {
   email: string;
