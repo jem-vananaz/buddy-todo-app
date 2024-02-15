@@ -7,7 +7,6 @@ const SelectButtonWrapper = styled.button`
   border: none;
   border-radius: 4px;
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   line-height: 16.41px;
   letter-spacing: 0em;
