@@ -9,6 +9,7 @@ import HeaderComponent from '@/components/Header/Header';
 import Notification from '@/components/Notification/Notification';
 import TodoItem from '@/components/Todo/TodoItem/TodoItem';
 import { Todo, fetchTodosEndpoint, deleteTodoEndpoint } from '@/utils/api';
+import { removeToken } from '@/utils/auth';
 
 const Home = () => {
   const queryClient = useQueryClient();
@@ -79,7 +80,8 @@ const Home = () => {
   };
 
   const handleLogout = () => {
-    // Add your logout logic here
+    removeToken();
+    navigate('/login');
   };
 
   return (
