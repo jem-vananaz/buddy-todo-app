@@ -26,18 +26,20 @@ const Input = styled.input`
   font-size: 14px;
   outline: none;
   position: relative;
+  box-sizing: content-box;
 
   &:focus {
     border-color: #2f80ed;
   }
 `;
 
-const ClearIcon = styled.img`
+const ClearIcon = styled.img<{ visible?: boolean }>`
   position: absolute;
   top: 50%;
-  right: 0;
-  transform: translateX(155%);
+  transform: translateY(-50%);
+  right: -35px;
   cursor: pointer;
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
 `;
 
 export interface TextFieldProps {
@@ -47,6 +49,7 @@ export interface TextFieldProps {
   onChange: (value: string) => void;
   type?: string;
   onClear?: () => void;
+  clearIconVisible?: boolean;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -58,6 +61,7 @@ const TextField = ({
   type = 'text',
   onClear,
   onKeyDown,
+  clearIconVisible = true,
 }: TextFieldProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -81,7 +85,14 @@ const TextField = ({
         onKeyDown={onKeyDown}
         autoFocus={true}
       />
-      {value && <ClearIcon src={clearIcon} alt="Clear" onClick={handleClear} />}
+      {value && (
+        <ClearIcon
+          src={clearIcon}
+          alt="Clear"
+          onClick={handleClear}
+          visible={clearIconVisible}
+        />
+      )}
     </TextFieldWrapper>
   );
 };
