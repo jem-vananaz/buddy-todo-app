@@ -2,6 +2,10 @@ import { getToken } from './auth';
 
 const BASE_URL = 'http://localhost:3000/api';
 
+export interface ErrorResponse {
+  message: string;
+}
+
 export interface Todo {
   _id: string;
   text: string;
@@ -69,4 +73,25 @@ export const deleteTodoEndpoint = async (todoId: string): Promise<void> => {
       Authorization: `Bearer ${token}`,
     },
   });
+};
+
+// Function to login
+export const loginEndpoint = async (credentials: {
+  email: string;
+  password: string;
+}): Promise<{ token: string }> => {
+  const response = await fetch(`${BASE_URL}/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return response.json();
 };

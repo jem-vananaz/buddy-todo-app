@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import routes from './routes';
+import ProtectedRoutes from './routes/ProtectedRoutes';
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -13,11 +14,13 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <ReactRoutes>
-          {routes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} />
-          ))}
-        </ReactRoutes>
+        <ProtectedRoutes>
+          <ReactRoutes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+          </ReactRoutes>
+        </ProtectedRoutes>
       </Router>
     </QueryClientProvider>
   );
