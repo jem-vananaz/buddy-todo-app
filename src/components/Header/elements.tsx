@@ -22,7 +22,6 @@ export const TitleRow = styled.div`
 
 export const HeaderTitle = styled.h1`
   color: #2f80ed;
-  font-family: 'Roboto', sans-serif;
   margin-top: 0;
   font-size: 18px;
 `;
@@ -36,7 +35,7 @@ export const SearchFieldWrapper = styled.div`
   align-items: center;
 
   & > *:first-child {
-    margin-right: 7px; /* Add margin to the right of the first child (SearchField) */
+    margin-right: 7px;
   }
 
   @media (min-width: 600px) {
@@ -45,7 +44,7 @@ export const SearchFieldWrapper = styled.div`
     width: 100%;
 
     & > *:first-child {
-      margin-right: 14px; /* Add margin to the right of the first child (SearchField) */
+      margin-right: 14px;
     }
   }
 `;

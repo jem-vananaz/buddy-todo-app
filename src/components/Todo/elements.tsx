@@ -14,7 +14,6 @@ export const TitleRow = styled.div`
 `;
 
 export const HeaderTitle = styled.h1`
-  font-family: 'Roboto', sans-serif;
   font-size: 18px;
   margin-left: 8px;
 `;

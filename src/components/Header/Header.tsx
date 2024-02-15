@@ -34,7 +34,7 @@ const HeaderComponent = ({
       <SearchFieldWrapper>
         <SearchField
           value={searchKeyword || ''}
-          onChange={(newValue) => setSearchKeyword(newValue)}
+          onChange={(newValue) => setSearchKeyword?.(newValue)}
         />
         <Link to="/select-todo">
           <SelectButton onClick={handleSelectButton} />
