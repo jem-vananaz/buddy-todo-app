@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const AuthContainer = styled.div`
@@ -40,12 +41,12 @@ export const AuthTagline = styled.div`
   font-size: 14px;
 `;
 
-export const LoginForm = styled.form`
+export const AuthFormContainer = styled.form`
   flex-direction: column;
   padding: 30px 40px 10px 40px;
 `;
 
-export const LoginButton = styled.button`
+export const FormButton = styled.button`
   margin-top: 15px;
   background-color: #2f80ed;
   color: white;
@@ -76,4 +77,16 @@ export const GeneralErrorMessage = styled.div`
   color: #ed2f2f;
   font-size: 12px;
   margin-top: 15px;
+`;
+
+export const Text = styled.p`
+  font-size: 14px;
+  color: #403e3e;
+`;
+
+export const StyledLink = styled(Link)`
+  color: #2f80ed;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
 `;
