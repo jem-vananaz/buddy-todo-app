@@ -5,7 +5,7 @@ import EmptyTodoList from '@/components/Todo/EmptyList/EmptyList';
 import TodoComponent from '@/components/Todo/TodoComponent/TodoComponent';
 import TodoItem from '@/components/Todo/TodoItem/TodoItem';
 import TodoOptionsDialog from '@/components/Dialogs/TodoOptionsDialog/TodoOptionsDialog';
-import { fetchTodosEndpoint, completeTodosEndpoint } from '@/utils/api';
+import { fetchTodosEndpoint, completeMultiTodosEndpoint } from '@/utils/api';
 
 const SelectTodo = () => {
   const queryClient = useQueryClient();
@@ -15,7 +15,7 @@ const SelectTodo = () => {
   const [notificationMessage, setNotificationMessage] = useState('');
   const [showNotification, setShowNotification] = useState(false);
 
-  const completeTodosMutation = useMutation(completeTodosEndpoint, {
+  const completeTodosMutation = useMutation(completeMultiTodosEndpoint, {
     onSuccess: () => {
       queryClient.invalidateQueries('todos');
       setIsDialogVisible(false);

@@ -6,6 +6,11 @@ export interface ErrorResponse {
   message: string;
 }
 
+export interface Response {
+  message: string;
+  token: string;
+}
+
 export interface Todo {
   _id: string;
   text: string;
@@ -77,7 +82,7 @@ export const deleteTodoEndpoint = async (todoId: string): Promise<void> => {
 };
 
 // Function to complete multiple todos
-export const completeTodosEndpoint = async (
+export const completeMultiTodosEndpoint = async (
   todoIds: string[],
 ): Promise<void> => {
   const token = getToken();
@@ -106,11 +111,12 @@ export const registerEndpoint = async (credentials: {
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
+    const error = (await response.json()) as ErrorResponse;
+    const errorMessage = error?.message || 'Unknown error occurred';
+    throw new Error(errorMessage);
   }
 
-  return response.json();
+  return (await response.json()) as Response;
 };
 
 // Function to login
@@ -127,9 +133,10 @@ export const loginEndpoint = async (credentials: {
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
+    const error = (await response.json()) as ErrorResponse;
+    const errorMessage = error?.message || 'Unknown error occurred';
+    throw new Error(errorMessage);
   }
 
-  return response.json();
+  return (await response.json()) as Response;
 };
