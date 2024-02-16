@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import TodoComponent from '@/components/Todo/TodoComponent';
+import TodoComponent from '@/components/Todo/TodoComponent/TodoComponent';
 import { Todo, fetchTodoById, updateTodoEndpoint } from '@/utils/api';
 
 const UpdateTodo = () => {

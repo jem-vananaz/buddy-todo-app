@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import searchIcon from '../../assets/search-icon.svg';
-import clearIcon from '../../assets/clear-icon.svg';
+import searchIcon from '@/assets/search-icon.svg';
+import clearIcon from '@/assets/clear-icon.svg';
 
 const SearchFieldWrapper = styled.div`
   display: flex;

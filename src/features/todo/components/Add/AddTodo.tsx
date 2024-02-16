@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import TodoComponent from '@/components/Todo/TodoComponent';
+import TodoComponent from '@/components/Todo/TodoComponent/TodoComponent';
 import { addTodoEndpoint } from '@/utils/api';
 
 const AddTodo = () => {
