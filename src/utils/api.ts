@@ -9,6 +9,7 @@ export interface ErrorResponse {
 export interface Todo {
   _id: string;
   text: string;
+  status: string;
 }
 
 // Function to add a todo
@@ -75,6 +76,22 @@ export const deleteTodoEndpoint = async (todoId: string): Promise<void> => {
   });
 };
 
+// Function to complete multiple todos
+export const completeTodosEndpoint = async (
+  todoIds: string[],
+): Promise<void> => {
+  const token = getToken();
+  await fetch(`${BASE_URL}/complete-todos`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ todoIds }),
+  });
+};
+
+// Auth Endpoints
 // Function to register a new user
 export const registerEndpoint = async (credentials: {
   email: string;

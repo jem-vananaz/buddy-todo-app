@@ -9,7 +9,7 @@ import {
 } from './elements';
 import backIcon from '@/assets/back-icon.svg';
 import Notification from '@/components/Notification/Notification';
-import TextField from '@/components/TextField/TextField';
+import TextField from '@/components/Elements/TextField/TextField';
 
 interface TodoComponentProps {
   title: string;

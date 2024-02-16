@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient, useQuery } from 'react-query';
 import { AppContainer } from './elements';
-import AddButton from '@/components/Buttons/AddButton';
-import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog';
-import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
+import AddButton from '@/components/Elements/Buttons/AddButton/AddButton';
+import DeleteConfirmDialog from '@/components/Dialogs/DeleteConfirmDialog/DeleteConfirmDialog';
+import EmptyTodoList from '@/components/Todo/EmptyList/EmptyList';
 import HeaderComponent from '@/components/Header/Header';
 import Notification from '@/components/Notification/Notification';
 import TodoItem from '@/components/Todo/TodoItem/TodoItem';
@@ -46,7 +46,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleSelectButton = () => {
-    console.log('select button clicked');
+    navigate('/select-todo');
   };
 
   const handleKebabIconClick = (id: string) => {
@@ -100,6 +100,7 @@ const Home = () => {
               key={todo._id}
               id={todo._id}
               text={todo.text}
+              status={todo.status}
               isSelectedForDeletion={todo._id === selectedForDeletionId}
               visibleActionButtonsId={visibleActionButtonsId}
               onClick={() => setVisibleActionButtonsId(undefined)}

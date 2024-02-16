@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logoutIcon from '../../assets/logout-icon.svg';
+import logoutIcon from '@/assets/logout-icon.svg';
 
 const LogoutButtonWrapper = styled.button`
   background: none;

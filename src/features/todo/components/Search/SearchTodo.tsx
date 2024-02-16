@@ -1,5 +1,5 @@
-import EmptyTodoList from '@/components/EmptyTodo/EmptyTodoList';
-import TodoComponent from '@/components/Todo/TodoComponent';
+import EmptyTodoList from '@/components/Todo/EmptyList/EmptyList';
+import TodoComponent from '@/components/Todo/TodoComponent/TodoComponent';
 
 const SearchTodo = () => (
   <>

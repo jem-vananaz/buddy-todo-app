@@ -16,7 +16,7 @@ import {
   Text,
   StyledLink,
 } from './elements';
-import TextField from '@/components/TextField/TextField';
+import TextField from '@/components/Elements/TextField/TextField';
 import { registerEndpoint, loginEndpoint, ErrorResponse } from '@/utils/api';
 import { setToken } from '@/utils/auth';
 

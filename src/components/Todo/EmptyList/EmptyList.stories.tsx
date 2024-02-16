@@ -1,6 +1,6 @@
 import { StoryObj, Meta } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import EmptyTodoList, { EmptyTodoListProps } from './EmptyTodoList';
+import EmptyTodoList, { EmptyTodoListProps } from './EmptyList';
 
 const meta: Meta<EmptyTodoListProps> = {
   title: 'Components/EmptyTodoList',
