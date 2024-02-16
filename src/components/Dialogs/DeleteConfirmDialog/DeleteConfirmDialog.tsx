@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const DialogContainer = styled.div`
   position: fixed;
-  top: 50%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #eef3f6;
