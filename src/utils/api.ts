@@ -96,6 +96,21 @@ export const completeMultiTodosEndpoint = async (
   });
 };
 
+// Function to delete multiple todos
+export const deleteMultiTodosEndpoint = async (
+  todoIds: string[],
+): Promise<void> => {
+  const token = getToken();
+  await fetch(`${BASE_URL}/delete-todos`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ todoIds }),
+  });
+};
+
 // Auth Endpoints
 // Function to register a new user
 export const registerEndpoint = async (credentials: {

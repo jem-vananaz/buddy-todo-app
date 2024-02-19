@@ -32,7 +32,7 @@ const HeaderComponent = ({
       </TitleRow>
       <SearchFieldWrapper>
         <SearchField
-          value={searchKeyword || ''}
+          value={searchKeyword}
           onChange={(newValue) => setSearchKeyword?.(newValue)}
         />
         <SelectButton onClick={handleSelectButton} />
