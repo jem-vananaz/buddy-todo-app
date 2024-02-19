@@ -11,29 +11,32 @@ import backIcon from '@/assets/back-icon.svg';
 import Notification from '@/components/Notification/Notification';
 import TextField from '@/components/Elements/TextField/TextField';
 
-interface TodoFormProps {
+export interface TodoFormProps {
   title: string;
   onAction?: (todoValue: string) => void;
-  actionNotificationMessage?: string;
   showTextField?: boolean;
   initialValue?: string;
   clearTrigger?: boolean;
   onClear?: () => void;
   disabled?: boolean;
+  notificationVisible?: boolean;
+  notificationMessage?: string;
+  notificationDuration?: number;
 }
 
 const TodoForm = ({
   title,
   onAction,
-  actionNotificationMessage,
   showTextField = true,
   initialValue = '',
   clearTrigger = false,
   onClear,
   disabled,
+  notificationVisible = false,
+  notificationMessage = '',
+  notificationDuration = 3000,
 }: TodoFormProps) => {
   const [todoValue, setTodoValue] = useState(initialValue);
-  const [notification, setNotification] = useState('');
 
   useEffect(() => {
     if (clearTrigger) {
@@ -65,13 +68,6 @@ const TodoForm = ({
     if (onAction) {
       onAction(todoValue);
     }
-
-    if (actionNotificationMessage) {
-      setNotification(actionNotificationMessage);
-      setTimeout(() => {
-        setNotification('');
-      }, 3000);
-    }
   };
 
   return (
@@ -91,7 +87,12 @@ const TodoForm = ({
             onKeyDown={handleKeyDown}
             disabled={disabled}
           />
-          {notification && <Notification message={notification} />}
+          {notificationVisible && (
+            <Notification
+              message={notificationMessage}
+              duration={notificationDuration}
+            />
+          )}
         </TextFieldWrapper>
       )}
     </Header>

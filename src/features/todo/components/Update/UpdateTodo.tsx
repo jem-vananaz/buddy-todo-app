@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import Notification from '@/components/Notification/Notification';
-import TodoForm from '@/components/Todo/TodoForm/TodoForm';
+import TodoForm, { TodoFormProps } from '@/components/Todo/TodoForm/TodoForm';
 import { Todo, fetchTodoById, updateTodoEndpoint } from '@/utils/api';
 import styled from 'styled-components';
 
@@ -18,8 +17,7 @@ const UpdateTodo = () => {
 
   const [initialValue, setInitialValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
-  const [notificationMessage, setNotificationMessage] = useState<string>('');
-  const [showNotification, setShowNotification] = useState(false);
+  const [notificationVisible, setNotificationVisible] = useState(false);
   const [showLoader, setShowLoader] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
@@ -38,11 +36,8 @@ const UpdateTodo = () => {
   >((data) => updateTodoEndpoint(data._id, data.text), {
     onSuccess: () => {
       queryClient.invalidateQueries('todo');
-      setNotificationMessage('To do updated');
-      setShowNotification(true);
       setShowLoader(true);
       setTimeout(() => {
-        setShowNotification(false);
         setShowLoader(false);
         navigate('/');
       }, 1500);
@@ -73,16 +68,20 @@ const UpdateTodo = () => {
     return <Loader>Loading...</Loader>; // Render the loader UI
   }
 
+  const todoFormProps: TodoFormProps = {
+    title: 'Update to do',
+    onAction: handleUpdateTodo,
+    initialValue: initialValue || '',
+    disabled: showLoader,
+    notificationVisible: notificationVisible,
+    notificationMessage: 'To do updated',
+    notificationDuration: 1500,
+  };
+
   return (
     <>
-      <TodoForm
-        title="Update to do"
-        onAction={handleUpdateTodo}
-        initialValue={initialValue || ''}
-        disabled={showLoader}
-      />
+      <TodoForm {...todoFormProps} />
       {showLoader && <Loader>Updating to do...</Loader>}
-      {showNotification && <Notification message={notificationMessage} />}
     </>
   );
 };
