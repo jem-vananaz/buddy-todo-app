@@ -51,6 +51,7 @@ export interface TextFieldProps {
   onClear?: () => void;
   clearIconVisible?: boolean;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 }
 
 const TextField = ({
@@ -62,6 +63,7 @@ const TextField = ({
   onClear,
   onKeyDown,
   clearIconVisible = true,
+  disabled,
 }: TextFieldProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -84,8 +86,9 @@ const TextField = ({
         onChange={handleChange}
         onKeyDown={onKeyDown}
         autoFocus={true}
+        disabled={disabled}
       />
-      {value && (
+      {!disabled && value && (
         <ClearIcon
           src={clearIcon}
           alt="Clear"

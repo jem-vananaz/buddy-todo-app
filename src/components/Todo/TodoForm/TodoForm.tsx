@@ -11,7 +11,7 @@ import backIcon from '@/assets/back-icon.svg';
 import Notification from '@/components/Notification/Notification';
 import TextField from '@/components/Elements/TextField/TextField';
 
-interface TodoComponentProps {
+interface TodoFormProps {
   title: string;
   onAction?: (todoValue: string) => void;
   actionNotificationMessage?: string;
@@ -19,9 +19,10 @@ interface TodoComponentProps {
   initialValue?: string;
   clearTrigger?: boolean;
   onClear?: () => void;
+  disabled?: boolean;
 }
 
-const TodoComponent = ({
+const TodoForm = ({
   title,
   onAction,
   actionNotificationMessage,
@@ -29,7 +30,8 @@ const TodoComponent = ({
   initialValue = '',
   clearTrigger = false,
   onClear,
-}: TodoComponentProps) => {
+  disabled,
+}: TodoFormProps) => {
   const [todoValue, setTodoValue] = useState(initialValue);
   const [notification, setNotification] = useState('');
 
@@ -87,6 +89,7 @@ const TodoComponent = ({
             onChange={handleChange}
             onClear={handleClear}
             onKeyDown={handleKeyDown}
+            disabled={disabled}
           />
           {notification && <Notification message={notification} />}
         </TextFieldWrapper>
@@ -95,4 +98,4 @@ const TodoComponent = ({
   );
 };
 
-export default TodoComponent;
+export default TodoForm;

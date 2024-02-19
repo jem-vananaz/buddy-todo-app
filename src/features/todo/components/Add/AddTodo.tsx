@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import TodoComponent from '@/components/Todo/TodoComponent/TodoComponent';
+import TodoForm from '@/components/Todo/TodoForm/TodoForm';
 import { addTodoEndpoint } from '@/utils/api';
 
 const AddTodo = () => {
@@ -24,7 +24,7 @@ const AddTodo = () => {
   };
 
   return (
-    <TodoComponent
+    <TodoForm
       title="Add to do"
       onAction={handleAddTodo}
       actionNotificationMessage="To do saved"
