@@ -36,6 +36,7 @@ const UpdateTodo = () => {
   >((data) => updateTodoEndpoint(data._id, data.text), {
     onSuccess: () => {
       queryClient.invalidateQueries('todo');
+      setNotificationVisible(true);
       setShowLoader(true);
       setTimeout(() => {
         setShowLoader(false);
