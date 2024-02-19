@@ -34,18 +34,30 @@ const NotificationContainer = styled.div<{ isVisible: boolean }>`
 
 interface NotificationProps {
   message: string;
+  visible?: boolean;
+  duration?: number;
 }
 
-const Notification = ({ message }: NotificationProps) => {
-  const [isVisible, setIsVisible] = useState(true);
+const Notification = ({
+  message,
+  visible = true,
+  duration = 3000,
+}: NotificationProps) => {
+  const [isVisible, setIsVisible] = useState(visible);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
+    let timeoutId: NodeJS.Timeout;
 
-    return () => clearTimeout(timeout);
-  }, []);
+    if (visible) {
+      timeoutId = setTimeout(() => {
+        setIsVisible(false);
+      }, duration);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [visible, duration]);
 
   return (
     <NotificationContainer isVisible={isVisible}>

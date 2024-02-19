@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import TodoForm from '@/components/Todo/TodoForm/TodoForm';
+import TodoForm, { TodoFormProps } from '@/components/Todo/TodoForm/TodoForm';
 import { addTodoEndpoint } from '@/utils/api';
 
 const AddTodo = () => {
   const [clearTrigger, setClearTrigger] = useState(false);
+  const [notificationVisible, setNotificationVisible] = useState(false);
+
   const addTodoMutation = useMutation(addTodoEndpoint, {
     onSuccess: () => {
       setClearTrigger(true);
+      setNotificationVisible(true);
     },
   });
 
@@ -23,15 +26,17 @@ const AddTodo = () => {
     setClearTrigger(false); // Reset the clearTrigger state back to false
   };
 
-  return (
-    <TodoForm
-      title="Add to do"
-      onAction={handleAddTodo}
-      actionNotificationMessage="To do saved"
-      clearTrigger={clearTrigger}
-      onClear={clearTextField}
-    />
-  );
+  const todoFormProps: TodoFormProps = {
+    title: 'Add to do',
+    onAction: handleAddTodo,
+    clearTrigger: clearTrigger,
+    onClear: clearTextField,
+    notificationVisible: notificationVisible,
+    notificationMessage: 'To do saved',
+    notificationDuration: 3000,
+  };
+
+  return <TodoForm {...todoFormProps} />;
 };
 
 export default AddTodo;
