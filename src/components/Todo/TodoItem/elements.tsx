@@ -63,7 +63,5 @@ export const ActionButtons = styled.div<{ isVisible: boolean }>`
   flex-direction: column;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   align-items: flex-start;
-  width: 115px;
-  height: 75px;
   margin-right: 7px;
 `;

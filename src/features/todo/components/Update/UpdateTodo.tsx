@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import TodoForm, { TodoFormProps } from '@/components/Todo/TodoForm/TodoForm';
+import TodoForm, { TodoFormProps } from '@/components/Forms/TodoForm/TodoForm';
 import { Todo, fetchTodoById, updateTodoEndpoint } from '@/utils/api';
 import styled from 'styled-components';
 
