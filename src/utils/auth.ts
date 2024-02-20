@@ -1,6 +1,24 @@
+interface TokenData {
+  exp: number;
+  iat: number;
+}
+
 // Function to retrieve the JWT token from local storage
 export const getToken = (): string | null => {
-  return localStorage.getItem('token');
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+
+  const tokenPayload = token.split('.')[1];
+  const tokenData = JSON.parse(atob(tokenPayload)) as TokenData;
+  const expiration = tokenData.exp * 1000; // Convert to milliseconds
+  const currentTime = new Date().getTime();
+
+  if (currentTime > expiration) {
+    removeToken(); // Remove expired token
+    return null;
+  }
+
+  return token;
 };
 
 // Function to set the JWT token in local storage
