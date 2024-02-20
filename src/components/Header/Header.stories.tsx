@@ -13,17 +13,17 @@ const meta: Meta<HeaderProps> = {
 
 export default meta;
 
-type Story = StoryObj<HeaderProps>;
+type StoryType = StoryObj<HeaderProps>;
 
 type TemplateArgs = Omit<HeaderProps, 'searchKeyword' | 'setSearchKeyword'> & {
   searchKeyword?: string;
 };
 
-const Template: Story = ({ searchKeyword, ...args }: TemplateArgs) => (
+const Template = ({ searchKeyword, ...args }: TemplateArgs) => (
   <HeaderComponent searchKeyword={searchKeyword || ''} {...args} />
 );
 
-export const Default = Template;
+export const Default: StoryType = Template;
 Default.args = {
   searchKeyword: '',
   handleSelectButton: action('selectButtonClicked'),

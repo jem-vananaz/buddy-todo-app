@@ -13,9 +13,9 @@ const meta: Meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof TextField>;
+type StoryType = StoryObj<typeof TextField>;
 
-export const Default: Story = (args) => {
+export const Default = (args: StoryType) => {
   const [value, setValue] = useState<string>('');
 
   const handleChange: TextFieldProps['onChange'] = (newValue) => {

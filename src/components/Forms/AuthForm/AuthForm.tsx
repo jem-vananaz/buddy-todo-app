@@ -20,7 +20,7 @@ import TextField from '@/components/Elements/TextField/TextField';
 import { registerEndpoint, loginEndpoint, ErrorResponse } from '@/utils/api';
 import { setToken } from '@/utils/auth';
 
-interface AuthFormProps {
+export interface AuthFormProps {
   isRegister: boolean;
   buttonText: string;
   bottomLinkText: string;
