@@ -4,10 +4,11 @@ export const StyledActionButton = styled.button`
   background-color: #ffffff;
   border: none;
   border-radius: 4px;
-  padding: 8px;
-  margin-bottom: 4px;
+  width: 115px;
+  padding: 12px 16px;
   font-size: 14px;
   font-weight: normal;
+  text-align: left;
 
   &:hover {
     background-color: #f0f0f0;

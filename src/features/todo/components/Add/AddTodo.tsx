@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import TodoForm, { TodoFormProps } from '@/components/Todo/TodoForm/TodoForm';
+import TodoForm, { TodoFormProps } from '@/components/Forms/TodoForm/TodoForm';
 import { addTodoEndpoint } from '@/utils/api';
 
 const AddTodo = () => {
