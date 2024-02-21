@@ -10,8 +10,8 @@ import LogoutButton from '@/components/Elements/Buttons/LogoutButton/LogoutButto
 import SearchField from '@/components/Elements/SearchField/SearchField';
 
 export interface HeaderProps {
-  searchKeyword: string;
-  setSearchKeyword: (newValue: string) => void;
+  searchKeyword?: string;
+  setSearchKeyword?: (newValue: string) => void;
   handleSelectButton: () => void;
   handleLogout: () => void;
 }
@@ -32,7 +32,7 @@ const HeaderComponent = ({
       </TitleRow>
       <SearchFieldWrapper>
         <SearchField
-          value={searchKeyword}
+          value={searchKeyword || ''}
           onChange={(newValue) => setSearchKeyword?.(newValue)}
         />
         <SelectButton onClick={handleSelectButton} />

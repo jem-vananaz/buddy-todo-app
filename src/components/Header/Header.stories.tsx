@@ -1,31 +1,26 @@
+import { useState } from 'react';
 import { StoryObj, Meta } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import HeaderComponent, { HeaderProps } from './Header';
 
-const meta: Meta<HeaderProps> = {
+export default {
   title: 'Components/Header',
   component: HeaderComponent,
-  argTypes: {
-    handleSelectButton: { action: 'selectButtonClicked' },
-    handleLogout: { action: 'logoutClicked' },
-  },
+} as Meta;
+
+const Template: StoryObj<HeaderProps> = (args) => {
+  const [searchKeyword, setSearchKeyword] = useState('');
+
+  return (
+    <HeaderComponent
+      {...args}
+      searchKeyword={searchKeyword}
+      setSearchKeyword={setSearchKeyword}
+    />
+  );
 };
 
-export default meta;
-
-type StoryType = StoryObj<HeaderProps>;
-
-type TemplateArgs = Omit<HeaderProps, 'searchKeyword' | 'setSearchKeyword'> & {
-  searchKeyword?: string;
-};
-
-const Template = ({ searchKeyword, ...args }: TemplateArgs) => (
-  <HeaderComponent searchKeyword={searchKeyword || ''} {...args} />
-);
-
-export const Default: StoryType = Template;
+export const Default = Template.bind({});
 Default.args = {
-  searchKeyword: '',
-  handleSelectButton: action('selectButtonClicked'),
-  handleLogout: action('logoutClicked'),
+  handleSelectButton: () => console.log('Select button clicked'),
+  handleLogout: () => console.log('Logout button clicked'),
 };
