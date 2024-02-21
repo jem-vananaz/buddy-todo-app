@@ -31,6 +31,7 @@ const Home = () => {
   return (
     <AppContainer>
       <HeaderComponent
+        searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}
         handleSelectButton={handleSelectButton}
         handleLogout={handleLogout}

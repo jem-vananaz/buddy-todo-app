@@ -1,118 +1,132 @@
-// import { useState } from 'react';
-// import { StoryObj, Meta } from '@storybook/react';
-// import AuthForm, { AuthFormProps } from './AuthForm';
+import { useState } from 'react';
+import { StoryObj, Meta } from '@storybook/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query'; // Import QueryClient and QueryClientProvider
+import AuthForm, { AuthFormProps } from './AuthForm';
 
-// const meta: Meta = {
-//   title: 'Components/AuthForm',
-//   component: AuthForm,
-//   argTypes: {
-//     isRegister: { control: 'boolean' },
-//     buttonText: { control: 'text' },
-//     bottomLinkText: { control: 'text' },
-//     bottomLinkTo: { control: 'text' },
-//   },
-// };
+const meta: Meta = {
+  title: 'Components/AuthForm',
+  component: AuthForm,
+  argTypes: {
+    isRegister: { control: 'boolean' },
+    buttonText: { control: 'text' },
+    bottomLinkText: { control: 'text' },
+    bottomLinkTo: { control: 'text' },
+  },
+};
 
-// export default meta;
+export default meta;
 
-// type StoryType = StoryObj<AuthFormProps>;
+type StoryType = StoryObj<AuthFormProps>;
 
-// export const Register: StoryType = (args: StoryType) => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [emailErrorMessage, setEmailErrorMessage] = useState('');
-//   const [isDisabled, setIsDisabled] = useState(true);
+const queryClient = new QueryClient(); // Create a QueryClient instance
 
-//   const handleEmailChange = (value: string) => {
-//     setEmail(value);
-//     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-//     setEmailErrorMessage(
-//       value ? (isValidEmail ? '' : 'Invalid email format') : '',
-//     );
-//     updateButtonState(value, password);
-//   };
+export const AuthFormRegister: StoryType = (args: AuthFormProps) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
-//   const handlePasswordChange = (value: string) => {
-//     setPassword(value);
-//     updateButtonState(email, value);
-//   };
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    setEmailErrorMessage(
+      value ? (isValidEmail ? '' : 'Invalid email format') : '',
+    );
+    updateButtonState(value, password);
+  };
 
-//   const updateButtonState = (email: string, password: string) => {
-//     setIsDisabled(!email || !password || !!emailErrorMessage);
-//   };
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
+    updateButtonState(email, value);
+  };
 
-//   const handleSubmitForm = (event: React.FormEvent) => {
-//     event.preventDefault();
-//     // Simulating register API call
-//   };
+  const updateButtonState = (email: string, password: string) => {
+    setIsDisabled(!email || !password || !!emailErrorMessage);
+  };
 
-//   return (
-//     <AuthForm
-//       {...args}
-//       email={email}
-//       password={password}
-//       emailErrorMessage={emailErrorMessage}
-//       isDisabled={isDisabled}
-//       onEmailChange={handleEmailChange}
-//       onPasswordChange={handlePasswordChange}
-//       onSubmitForm={handleSubmitForm}
-//     />
-//   );
-// };
+  const handleSubmitForm = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Simulating register or login API call
+  };
 
-// Register.args = {
-//   isRegister: true,
-//   buttonText: 'Register',
-//   bottomLinkText: 'Already have an account? Login',
-//   bottomLinkTo: '/login',
-// };
+  return (
+    <QueryClientProvider client={queryClient}>
+      {' '}
+      {/* Provide the QueryClient instance */}
+      <Router>
+        <AuthForm
+          {...args}
+          email={email}
+          password={password}
+          emailErrorMessage={emailErrorMessage}
+          isDisabled={isDisabled}
+          onEmailChange={handleEmailChange}
+          onPasswordChange={handlePasswordChange}
+          onSubmitForm={handleSubmitForm}
+        />
+      </Router>
+    </QueryClientProvider>
+  );
+};
 
-// export const Login: StoryType = (args: StoryType) => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [emailErrorMessage, setEmailErrorMessage] = useState('');
-//   const [isDisabled, setIsDisabled] = useState(true);
+AuthFormRegister.args = {
+  isRegister: true,
+  buttonText: 'Register',
+  bottomLinkText: 'Already have an account? Login',
+  bottomLinkTo: '/login',
+};
 
-//   const handleEmailChange = (value: string) => {
-//     setEmail(value);
-//     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-//     setEmailErrorMessage(
-//       value ? (isValidEmail ? '' : 'Invalid email format') : '',
-//     );
-//     updateButtonState(value, password);
-//   };
+export const AuthFormLogin: StoryType = (args: AuthFormProps) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
-//   const handlePasswordChange = (value: string) => {
-//     setPassword(value);
-//     updateButtonState(email, value);
-//   };
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    setEmailErrorMessage(
+      value ? (isValidEmail ? '' : 'Invalid email format') : '',
+    );
+    updateButtonState(value, password);
+  };
 
-//   const updateButtonState = (email: string, password: string) => {
-//     setIsDisabled(!email || !password || !!emailErrorMessage);
-//   };
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
+    updateButtonState(email, value);
+  };
 
-//   const handleSubmitForm = (event: React.FormEvent) => {
-//     event.preventDefault();
-//     // Simulating login API call
-//   };
+  const updateButtonState = (email: string, password: string) => {
+    setIsDisabled(!email || !password || !!emailErrorMessage);
+  };
 
-//   return (
-//     <AuthForm
-//       {...args}
-//       email={email}
-//       password={password}
-//       emailErrorMessage={emailErrorMessage}
-//       isDisabled={isDisabled}
-//       onEmailChange={handleEmailChange}
-//       onPasswordChange={handlePasswordChange}
-//       onSubmitForm={handleSubmitForm}
-//     />
-//   );
-// };
+  const handleSubmitForm = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Simulating login API call
+  };
 
-// Login.args = {
-//   isRegister: false,
-//   buttonText: 'Login',
-//   bottomLinkText: "Don't have an account? Register",
-//   bottomLinkTo: '/register',
-// };
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <AuthForm
+          {...args}
+          email={email}
+          password={password}
+          emailErrorMessage={emailErrorMessage}
+          isDisabled={isDisabled}
+          onEmailChange={handleEmailChange}
+          onPasswordChange={handlePasswordChange}
+          onSubmitForm={handleSubmitForm}
+        />
+      </Router>
+    </QueryClientProvider>
+  );
+};
+
+AuthFormLogin.args = {
+  isRegister: false,
+  buttonText: 'Login',
+  bottomLinkText: "Don't have an account? Register",
+  bottomLinkTo: '/register',
+};
