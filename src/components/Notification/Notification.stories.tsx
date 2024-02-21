@@ -14,3 +14,15 @@ export const AddingTodo: Story = {
     message: 'To do saved',
   },
 };
+
+export const UpdatingTodo: Story = {
+  args: {
+    message: 'To do updated',
+  },
+};
+
+export const DeletingTodo: Story = {
+  args: {
+    message: 'To do deleted',
+  },
+};
