@@ -9,6 +9,7 @@ const SearchFieldWrapper = styled.div`
 
 const Input = styled.input`
   min-width: 224px;
+  width: 100%;
   height: 32px;
   padding-left: 32px;
   border: 1px solid #828282;
@@ -41,11 +42,12 @@ const ClearIcon = styled.img`
 `;
 
 export interface SearchFieldProps {
+  placeholder?: string;
   value: string;
   onChange: (value: string) => void;
 }
 
-const SearchField = ({ value, onChange }: SearchFieldProps) => {
+const SearchField = ({ placeholder, value, onChange }: SearchFieldProps) => {
   const handleClear = () => {
     onChange('');
   };
@@ -57,6 +59,7 @@ const SearchField = ({ value, onChange }: SearchFieldProps) => {
       </MagnifyingGlassIcon>
       <Input
         type="text"
+        placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

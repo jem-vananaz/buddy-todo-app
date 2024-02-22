@@ -11,7 +11,7 @@ import kebabIcon from '@/assets/kebab-icon.svg';
 import ActionButton from '@/components/Elements/Buttons/ActionButton/ActionButton';
 import Checkbox from '@/components/Elements/Checkbox/Checkbox';
 
-interface TodoItemProps {
+export interface TodoItemProps {
   id: string;
   text: string;
   status: string;
