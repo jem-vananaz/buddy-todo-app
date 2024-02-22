@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const AuthContainer = styled.div`
-  margin-top: 20px;
+  max-width: 400px;
+  margin: 0 auto;
 `;
 
 export const AuthHeader = styled.div`
