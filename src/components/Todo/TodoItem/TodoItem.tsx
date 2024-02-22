@@ -40,11 +40,25 @@ const TodoItem = ({
   handleUpdateTodo,
   handleDeleteTodo,
 }: TodoItemProps) => {
-  const [internalSelected, setInternalSelected] = useState(false);
+  const [internalSelected, setInternalSelected] = useState(isSelected);
 
   useEffect(() => {
     setInternalSelected(isSelected);
   }, [isSelected]);
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Prevent the event from propagating to parent elements
+    e.stopPropagation();
+
+    // Toggle the selection state
+    const newSelectionState = !internalSelected;
+    setInternalSelected(newSelectionState);
+
+    // Update the selected todos
+    if (handleSelectTodo) {
+      handleSelectTodo(id, newSelectionState);
+    }
+  };
 
   const handleCheckboxChange = () => {
     const newSelectionState = !internalSelected;
@@ -54,9 +68,14 @@ const TodoItem = ({
     }
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
+  const handleKebabClick = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
     handleKebabIconClick(id);
+  };
+
+  const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    // Prevent the event from propagating to parent elements
+    e.stopPropagation();
   };
 
   useEffect(() => {
@@ -88,14 +107,16 @@ const TodoItem = ({
   return (
     <TodoItemContainer
       key={id}
-      onClick={onClick}
+      onClick={handleClick}
       className={visibleActionButtonsId === id ? 'action-buttons-visible' : ''}
       status={status}>
       {showCheckbox && (
         <CheckboxContainer>
           <Checkbox
+            id={id}
             checked={internalSelected}
             onChange={handleCheckboxChange}
+            onClick={handleCheckboxClick}
           />
         </CheckboxContainer>
       )}
@@ -111,7 +132,7 @@ const TodoItem = ({
                 : ''
             }
             isVisible={!isSelectedForDeletion && visibleActionButtonsId === id}
-            onClick={handleClick}
+            onClick={handleKebabClick}
           />
           <ActionButtons isVisible={visibleActionButtonsId === id}>
             <ActionButton

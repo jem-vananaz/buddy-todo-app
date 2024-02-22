@@ -25,16 +25,14 @@ export const StyledCheckmark = styled.span<{ checked: boolean }>`
   border: 1px solid ${(props) => (props.checked ? '#6FCF97' : '#828282')};
   border-radius: 50%;
 
-  ::after {
-    content: ${(props) =>
-      props.checked ? "'\u2713'" : "''"}; /* Checkmark Unicode */
+  img {
+    display: ${(props) =>
+      props.checked ? 'block' : 'none'}; // Show/hide the icon
+    width: 12px;
+    height: 12px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 14px;
-    opacity: ${(props) =>
-      props.checked ? '1' : '0'}; /* Show/hide the checkmark */
   }
 `;

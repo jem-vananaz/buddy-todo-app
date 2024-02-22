@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import AddButton from '@/components/Elements/Buttons/AddButton/AddButton';
@@ -41,6 +41,14 @@ const TodoList = ({
     useState(false);
   const [notificationMessage, setNotificationMessage] = useState<string>('');
   const [showNotification, setShowNotification] = useState(false);
+
+  useEffect(() => {
+    if (!selectButtonClicked) {
+      setIsTodoOptionsDialogVisible(false);
+      // Clear selected todos when the select button is toggled off
+      setSelectedTodos([]);
+    }
+  }, [selectButtonClicked]);
 
   const completeTodosMutation = useMutation(completeMultiTodosEndpoint, {
     onSuccess: () => {
@@ -127,6 +135,18 @@ const TodoList = ({
     deleteTodosMutation.mutateAsync(selectedTodos);
   };
 
+  const handleTodoItemClick = useCallback((id: string) => {
+    setSelectedTodos((prevSelected) => {
+      if (prevSelected.includes(id)) {
+        // If the todo item is already selected, remove it from the selectedTodos array
+        return prevSelected.filter((todoId) => todoId !== id);
+      } else {
+        // If the todo item is not selected, add it to the selectedTodos array
+        return [...prevSelected, id];
+      }
+    });
+  }, []);
+
   const handleKebabIconClick = (id: string) => {
     setVisibleActionButtonsId(id === visibleActionButtonsId ? undefined : id);
   };
@@ -173,8 +193,8 @@ const TodoList = ({
               status={todo.status}
               isSelectedForDeletion={todo._id === selectedForDeletionId}
               visibleActionButtonsId={visibleActionButtonsId}
-              onClick={() => setVisibleActionButtonsId(undefined)}
-              showCheckbox={selectButtonClicked}
+              onClick={() => handleTodoItemClick(todo._id)}
+              showCheckbox={selectButtonClicked || selectedTodos.length > 0}
               isSelected={selectedTodos.includes(todo._id)}
               handleSelectTodo={handleSelectTodo}
               handleKebabIconClick={handleKebabIconClick}

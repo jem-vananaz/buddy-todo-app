@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '@/utils/auth';
 
@@ -6,7 +6,6 @@ const CHECK_INTERVAL = 3000000; // 50 minutes in milliseconds
 
 const ProtectedRoutes = ({ children }: { children: JSX.Element }) => {
   const navigate = useNavigate();
-  const [timer, setTimer] = useState<NodeJS.Timeout>();
 
   useEffect(() => {
     const checkAuthentication = () => {
@@ -14,26 +13,20 @@ const ProtectedRoutes = ({ children }: { children: JSX.Element }) => {
 
       if (!token) {
         navigate('/login', { replace: true });
-      } else {
-        // Schedule the next check after the interval
-        setTimer(
-          setTimeout(() => {
-            checkAuthentication();
-          }, CHECK_INTERVAL),
-        );
       }
     };
 
     // Initial check on component mount
     checkAuthentication();
 
-    // Cleanup function to clear timer on unmount
+    // Schedule the periodic check
+    const intervalId = setInterval(checkAuthentication, CHECK_INTERVAL);
+
+    // Cleanup function to clear interval on unmount
     return () => {
-      if (timer) {
-        clearTimeout(timer);
-      }
+      clearInterval(intervalId);
     };
-  }, [navigate, timer]);
+  }, [navigate]);
 
   return children;
 };
