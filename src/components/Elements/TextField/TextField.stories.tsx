@@ -18,7 +18,6 @@ type StoryType = StoryObj<typeof TextField>;
 
 const StoryContainer = styled.div`
   max-width: 320px;
-  padding: 20px;
 `;
 
 export const Default = (args: StoryType) => {
