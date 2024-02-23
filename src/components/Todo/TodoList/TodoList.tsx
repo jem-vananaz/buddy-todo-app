@@ -166,11 +166,15 @@ const TodoList = ({
     if (selectedForDeletionId !== undefined) {
       mutateDeleteTodo.mutateAsync(selectedForDeletionId);
       setSelectedForDeletionId(undefined);
+      setSelectedTodos([]); // Reset selected todos
+      setIsTodoOptionsDialogVisible(false); // Reset TodoOptionsDialog visibility
     }
   };
 
   const cancelDeleteTodo = () => {
     setSelectedForDeletionId(undefined);
+    setSelectedTodos([]); // Reset selected todos
+    setIsTodoOptionsDialogVisible(false); // Reset TodoOptionsDialog visibility
   };
 
   return (
@@ -194,7 +198,10 @@ const TodoList = ({
               isSelectedForDeletion={todo._id === selectedForDeletionId}
               visibleActionButtonsId={visibleActionButtonsId}
               onClick={() => handleTodoItemClick(todo._id)}
-              showCheckbox={selectButtonClicked || selectedTodos.length > 0}
+              showCheckbox={
+                selectButtonClicked ||
+                (selectedTodos.length > 0 && !selectedForDeletionId)
+              }
               isSelected={selectedTodos.includes(todo._id)}
               handleSelectTodo={handleSelectTodo}
               handleKebabIconClick={handleKebabIconClick}
@@ -209,7 +216,7 @@ const TodoList = ({
       {!searchKeyword && todos && todos.length > 0 && (
         <AddButton onClick={handleAddTodo} />
       )}
-      {isTodoOptionsDialogVisible && (
+      {isTodoOptionsDialogVisible && selectedForDeletionId === undefined && (
         <TodoOptionsDialog
           onSelectAll={handleSelectAll}
           onCompleteSelected={handleCompleteSelected}
