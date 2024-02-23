@@ -15,10 +15,10 @@ const UpdateTodo = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string | undefined }>();
 
-  const [initialValue, setInitialValue] = useState<string>('');
+  const [todoValue, setTodoValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
-  const [notificationVisible, setNotificationVisible] = useState(false);
   const [showLoader, setShowLoader] = useState<boolean>(false);
+  const [notificationVisible, setNotificationVisible] = useState(false);
 
   const queryClient = useQueryClient();
   const { data: todo, isLoading } = useQuery<Todo, Error>(
@@ -47,7 +47,7 @@ const UpdateTodo = () => {
 
   useEffect(() => {
     if (!isLoading && todo) {
-      setInitialValue(todo.text);
+      setTodoValue(todo.text);
       setLoading(false);
     }
   }, [isLoading, todo]);
@@ -66,13 +66,14 @@ const UpdateTodo = () => {
   };
 
   if (loading || isLoading) {
-    return <Loader>Loading...</Loader>; // Render the loader UI
+    return <Loader>Loading...</Loader>;
   }
 
   const todoFormProps: TodoFormProps = {
     title: 'Update to do',
+    todoValue: todoValue,
+    onTodoValueChange: setTodoValue,
     onAction: handleUpdateTodo,
-    initialValue: initialValue || '',
     disabled: showLoader,
     notificationVisible: notificationVisible,
     notificationMessage: 'To do updated',
