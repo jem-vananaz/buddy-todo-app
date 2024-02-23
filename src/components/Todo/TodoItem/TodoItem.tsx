@@ -46,38 +46,6 @@ const TodoItem = ({
     setInternalSelected(isSelected);
   }, [isSelected]);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Prevent the event from propagating to parent elements
-    e.stopPropagation();
-
-    // Toggle the selection state
-    const newSelectionState = !internalSelected;
-    setInternalSelected(newSelectionState);
-
-    // Update the selected todos
-    if (handleSelectTodo) {
-      handleSelectTodo(id, newSelectionState);
-    }
-  };
-
-  const handleCheckboxChange = () => {
-    const newSelectionState = !internalSelected;
-    setInternalSelected(newSelectionState);
-    if (handleSelectTodo) {
-      handleSelectTodo(id, newSelectionState);
-    }
-  };
-
-  const handleKebabClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    e.stopPropagation();
-    handleKebabIconClick(id);
-  };
-
-  const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    // Prevent the event from propagating to parent elements
-    e.stopPropagation();
-  };
-
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const clickedElement = e.target as Element;
@@ -104,13 +72,46 @@ const TodoItem = ({
     };
   }, [id, visibleActionButtonsId, handleKebabIconClick]);
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Prevent the event from propagating to parent elements
+    e.stopPropagation();
+
+    // Toggle selection state and show checkboxes
+    const newSelectionState = !internalSelected;
+    setInternalSelected(newSelectionState);
+    if (handleSelectTodo) {
+      handleSelectTodo(id, newSelectionState);
+    }
+
+    // Hide kebab icon when clicked on todo item
+    handleKebabIconClick('');
+  };
+
+  const handleCheckboxChange = () => {
+    const newSelectionState = !internalSelected;
+    setInternalSelected(newSelectionState);
+    if (handleSelectTodo) {
+      handleSelectTodo(id, newSelectionState);
+    }
+  };
+
+  const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    // Prevent the event from propagating to parent elements
+    e.stopPropagation();
+  };
+
+  const handleKebabClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
+    handleKebabIconClick(id);
+  };
+
   return (
     <TodoItemContainer
       key={id}
       onClick={handleClick}
       className={visibleActionButtonsId === id ? 'action-buttons-visible' : ''}
       status={status}>
-      {showCheckbox && (
+      {!isSelectedForDeletion && showCheckbox && (
         <CheckboxContainer>
           <Checkbox
             id={id}
